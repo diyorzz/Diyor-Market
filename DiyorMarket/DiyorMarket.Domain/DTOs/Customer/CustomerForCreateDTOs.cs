@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiyorMarket.Domain.DTOs.Product
+namespace DiyorMarket.Domain.DTOs.Customer
 {
-    public class ProductDto
+    internal class CustomerForCreateDTOs
     {
-
     }
 }

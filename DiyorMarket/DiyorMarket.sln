@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiyorMarket", "DiyorMarket\DiyorMarket.csproj", "{FA11B688-B857-4AB5-A066-35F8DDAD53A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiyorMarket", "DiyorMarket\DiyorMarket.csproj", "{FA11B688-B857-4AB5-A066-35F8DDAD53A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiyorMarket.Domain", "DiyorMarket.Domain\DiyorMarket.Domain.csproj", "{30D45BCA-5078-4A32-93D1-396E74274BD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiyorMarket.Domain", "DiyorMarket.Domain\DiyorMarket.Domain.csproj", "{30D45BCA-5078-4A32-93D1-396E74274BD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiyorMarket.Infrastructure", "DiyorMarket.Infrastructure\DiyorMarket.Infrastructure.csproj", "{FC6D8A4D-C4D5-4274-A0C1-F6D56E047416}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiyorMarket.Infrastructure", "DiyorMarket.Infrastructure\DiyorMarket.Infrastructure.csproj", "{FC6D8A4D-C4D5-4274-A0C1-F6D56E047416}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiyorMarket.Services", "DiyorMarket.Services\DiyorMarket.Services.csproj", "{DD4EBE00-802E-4943-8717-2D6FDE499C85}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiyorMarket.Service", "DiyorMarket.Service\DiyorMarket.Service.csproj", "{DA083E07-A7D5-488A-9357-9A065814FA4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{FC6D8A4D-C4D5-4274-A0C1-F6D56E047416}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC6D8A4D-C4D5-4274-A0C1-F6D56E047416}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC6D8A4D-C4D5-4274-A0C1-F6D56E047416}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DD4EBE00-802E-4943-8717-2D6FDE499C85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD4EBE00-802E-4943-8717-2D6FDE499C85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DD4EBE00-802E-4943-8717-2D6FDE499C85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DD4EBE00-802E-4943-8717-2D6FDE499C85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA083E07-A7D5-488A-9357-9A065814FA4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA083E07-A7D5-488A-9357-9A065814FA4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA083E07-A7D5-488A-9357-9A065814FA4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA083E07-A7D5-488A-9357-9A065814FA4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

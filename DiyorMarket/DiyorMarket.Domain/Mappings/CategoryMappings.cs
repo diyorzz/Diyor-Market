@@ -4,7 +4,7 @@ using DiyorMarket.Domain.Entities;
 
 namespace DiyorMarket.Domain.Mappings
 {
-    internal class CategoryMappings : Profile
+    public class CategoryMappings : Profile
     {
         public CategoryMappings() 
         {

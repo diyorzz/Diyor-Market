@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -27,6 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DiyorMarket.Domain\DiyorMarket.Domain.csproj" />
     <ProjectReference Include="..\DiyorMarket.Infrastructure\DiyorMarket.Infrastructure.csproj" />
+    <ProjectReference Include="..\DiyorMarket.Service\DiyorMarket.Service.csproj" />
   </ItemGroup>
 
 </Project>

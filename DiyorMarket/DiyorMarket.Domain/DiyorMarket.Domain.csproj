@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -9,6 +9,14 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\SupplyItem\" />
+    <Folder Include="DTOs\Supply\" />
+    <Folder Include="DTOs\Supplier\" />
+    <Folder Include="DTOs\SaleItam\" />
+    <Folder Include="DTOs\Sale\" />
   </ItemGroup>
 
 </Project>

@@ -6,20 +6,23 @@ using DiyorMarket.Domain.Entities;
 using Serilog;
 using System.Data.Common;
 
-namespace DiyorMarket.Services
+
+namespace DiyorMarket.Service
 {
-    public class CategoriesService : ICategoryService
+    public class CategoriesServies : ICategoryService
     {
         private readonly IMapper _mapper;
         private readonly ICommonRepository _repository;
         private readonly ILogger _logger;
 
-        public CategoriesService(IMapper mapper, ICommonRepository repository, ILogger logger)
+
+        public CategoriesServies(IMapper mapper, ICommonRepository repository, ILogger logger)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
+
         public IEnumerable<CategoryDto> GetCategories()
         {
             try
@@ -46,6 +49,7 @@ namespace DiyorMarket.Services
                 throw;
             }
         }
+
         public CategoryDto? GetCategoryById(int id)
         {
             try
@@ -72,6 +76,7 @@ namespace DiyorMarket.Services
                 throw;
             }
         }
+
         public CategoryDto CreateCategory(CategoryForCreateDto categoryToCreate)
         {
             try
@@ -101,6 +106,7 @@ namespace DiyorMarket.Services
                 throw;
             }
         }
+
         public void UpdateCategory(CategoryForUpdateDto categoryToUpdate)
         {
             try
@@ -126,6 +132,7 @@ namespace DiyorMarket.Services
                 throw;
             }
         }
+
         public void DeleteCategory(int id)
         {
             try
