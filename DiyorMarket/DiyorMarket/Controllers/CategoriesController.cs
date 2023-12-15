@@ -12,12 +12,10 @@ namespace DiyorMarket.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
-        private readonly IProductService productService;
 
-        public CategoriesController(ICategoryService categoryService, IProductService productService)
+        public CategoriesController(ICategoryService categoryService)
         {
             _categoryService = categoryService ?? throw new ArgumentNullException(nameof(categoryService));
-            this.productService = productService;
         }
 
         [HttpGet]

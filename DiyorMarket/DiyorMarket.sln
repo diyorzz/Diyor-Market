@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiyorMarket.Domain", "Diyor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiyorMarket.Infrastructure", "DiyorMarket.Infrastructure\DiyorMarket.Infrastructure.csproj", "{FC6D8A4D-C4D5-4274-A0C1-F6D56E047416}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiyorMarket.Service", "DiyorMarket.Service\DiyorMarket.Service.csproj", "{DA083E07-A7D5-488A-9357-9A065814FA4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiyorMarket.Services", "DiyorMarket.Service\DiyorMarket.Services.csproj", "{DA083E07-A7D5-488A-9357-9A065814FA4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

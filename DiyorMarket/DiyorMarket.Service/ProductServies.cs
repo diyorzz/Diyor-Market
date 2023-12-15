@@ -129,12 +129,12 @@ namespace DiyorMarket.Service
             }
             catch (DbException ex)
             {
-                _logger.Error("Database error occured while updating category.", ex.Message);
+                _logger.Error("Database error occured while updating product.", ex.Message);
                 throw;
             }
             catch (Exception ex)
             {
-                _logger.Error("Something went wrong while updating category.", ex.Message);
+                _logger.Error("Something went wrong while updating product.", ex.Message);
                 throw;
             }
         }
@@ -148,12 +148,12 @@ namespace DiyorMarket.Service
             }
             catch (DbException ex)
             {
-                _logger.Error($"Database error occured while deleting category with id: {id}.", ex.Message);
+                _logger.Error($"Database error occured while deleting product with id: {id}.", ex.Message);
                 throw;
             }
             catch (Exception ex)
             {
-                _logger.Error($"Something went wrong while deleting category with id: {id}.", ex.Message);
+                _logger.Error($"Something went wrong while deleting product with id: {id}.", ex.Message);
                 throw;
             }
         }
