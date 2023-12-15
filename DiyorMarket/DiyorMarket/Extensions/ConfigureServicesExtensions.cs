@@ -36,10 +36,9 @@ namespace DiyorMarket.Extensions
             return services;
         }
 
-        public static IServiceCollection GetServices(this IServiceCollection services)
+        public static IServiceCollection ConfigureServices(this IServiceCollection services)
         {
-            services.AddScoped<ICategoryService, CategoriesServies>();
-
+            services.AddScoped<ICategoryService, CategoryService>();
             return services;
         }
     }

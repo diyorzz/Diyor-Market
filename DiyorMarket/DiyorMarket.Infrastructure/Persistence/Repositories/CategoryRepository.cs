@@ -1,4 +1,4 @@
-﻿using DiyorMarket.Domain.Enterfaces.Repositories;
+﻿    using DiyorMarket.Domain.Enterfaces.Repositories;
 using DiyorMarket.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,6 +12,7 @@ namespace DiyorMarket.Infrastructure.Persistence.Repositories
     {
         public CategoryRepository(DiyorMarketDbContext context) : base(context)
         {
+            
         }
     }
 

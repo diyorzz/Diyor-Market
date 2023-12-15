@@ -1,4 +1,4 @@
-﻿using DiyorMarket.Domain.Common;
+﻿    using DiyorMarket.Domain.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +10,7 @@ namespace DiyorMarket.Domain.Entities
     public class Category : EntityBase
     {
         public string Name { get; set; }=string.Empty;
+        public int NumberOfProducts { get; set; }
         public virtual ICollection<Product> Products { get; set; }
 
         public Category()

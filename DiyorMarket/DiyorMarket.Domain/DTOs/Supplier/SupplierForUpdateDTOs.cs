@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiyorMarket.Domain.DTOs.Customer
+namespace DiyorMarket.Domain.DTOs.Supplier
 {
-    public record CustomerDtOs(
+    public record SupplierForUpdateDTOs(
         int Id,
-        string Name,
-        int Age,
+        string FirstName,
+        string LastName,
         string PhoneNumber,
-        string Email,
-        ICollection<CustomerDtOs> Customers
+        string Company
         );
 }

@@ -11,6 +11,7 @@ namespace DiyorMarket
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Host.UseSerilog();
+
             builder.Services.AddControllers()
                 .AddNewtonsoftJson()
                 .AddXmlSerializerFormatters();
@@ -21,9 +22,8 @@ namespace DiyorMarket
             builder.Services.ConfigureLogger();
             builder.Services.ConfigureRipositories();
             builder.Services.ConfigureDatabaseContext();
-            builder.Services.GetServices();
+            builder.Services.ConfigureServices();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 
             var app = builder.Build();
 

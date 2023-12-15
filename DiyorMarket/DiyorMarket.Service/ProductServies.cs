@@ -1,124 +1,130 @@
 ﻿using AutoMapper;
 using DiyorMarket.Domain.DTOs.Category;
+using DiyorMarket.Domain.DTOs.Product;
 using DiyorMarket.Domain.Enterfaces.Repositories;
 using DiyorMarket.Domain.Enterfaces.Services;
 using DiyorMarket.Domain.Entities;
 using Serilog;
+using System;
+using System.Collections.Generic;
 using System.Data.Common;
-
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DiyorMarket.Service
 {
-    public class CategoriesServies : ICategoryService
+    public class ProductServies : IProductService
     {
         private readonly IMapper _mapper;
         private readonly ICommonRepository _repository;
         private readonly ILogger _logger;
 
 
-        public CategoriesServies(IMapper mapper, ICommonRepository repository, ILogger logger)
+        public ProductServies(IMapper mapper, ICommonRepository repository, ILogger logger)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public IEnumerable<CategoryDto> GetCategories()
+        public IEnumerable<ProductDto> GetProducts()
         {
             try
             {
-                var categories = _repository.Category.FindAll();
+                var product = _repository.Product.FindAll();
 
-                var categoryDtos = _mapper.Map<IEnumerable<CategoryDto>>(categories);
+                var productDtos = _mapper.Map<IEnumerable<ProductDto>>(product);
 
-                return categoryDtos;
+                return productDtos;
             }
             catch (AutoMapperMappingException ex)
             {
-                _logger.Error($"There was an error mapping between Category and CategoryDto", ex.Message);
+                _logger.Error($"There was an error mapping between Product and ProductDTO", ex.Message);
                 throw;
             }
             catch (DbException ex)
             {
-                _logger.Error("Database error occured while fetching categories.", ex.Message);
+                _logger.Error("Database error occured while fetching products.", ex.Message);
                 throw;
             }
             catch (Exception ex)
             {
-                _logger.Error("Something went wrong while fetching categories.", ex.Message);
+                _logger.Error("Something went wrong while fetching products.", ex.Message);
                 throw;
             }
         }
 
-        public CategoryDto? GetCategoryById(int id)
+        public ProductDto? GetProductById(int id)
         {
             try
             {
-                var category = _repository.Category.FindById(id);
+                var product = _repository.Product.FindById(id);
 
-                var categoryDto = _mapper.Map<CategoryDto>(category);
+                var productDto = _mapper.Map<ProductDto>(product);
 
-                return categoryDto;
+                return productDto;
             }
             catch (AutoMapperMappingException ex)
             {
-                _logger.Error($"There was an error mapping between Category and CategoryDto", ex.Message);
+                _logger.Error($"There was an error mapping between Product and ProductDto", ex.Message);
                 throw;
             }
             catch (DbException ex)
             {
-                _logger.Error($"Database error occured while fetching category with id: {id}.", ex.Message);
+                _logger.Error($"Database error occured while fetching product with id: {id}.", ex.Message);
                 throw;
             }
             catch (Exception ex)
             {
-                _logger.Error($"Something went wrong while fetching category with id: {id}.", ex.Message);
+                _logger.Error($"Something went wrong while fetching product with id: {id}.", ex.Message);
                 throw;
             }
         }
 
-        public CategoryDto CreateCategory(CategoryForCreateDto categoryToCreate)
+        public ProductDto CreateProduct(ProductForCreateDTOs productForCreate)
         {
             try
             {
-                var categoryEntity = _mapper.Map<Category>(categoryToCreate);
+                var productEntity = _mapper.Map<Product>(productForCreate);
 
-                var createdCategory = _repository.Category.Create(categoryEntity);
+                var createdProduct = _repository.Product.Create(productEntity);
                 _repository.SaveChanges();
 
-                var categoryDto = _mapper.Map<CategoryDto>(createdCategory);
+                var productDto = _mapper.Map<ProductDto>(productEntity);
 
-                return categoryDto;
+                return productDto;
             }
             catch (AutoMapperMappingException ex)
             {
-                _logger.Error($"There was an error mapping between Category and CategoryDto", ex.Message);
+                _logger.Error($"There was an error mapping between product and productDto", ex.Message);
                 throw;
             }
             catch (DbException ex)
             {
-                _logger.Error("Database error occured while creating new category.", ex.Message);
+                _logger.Error("Database error occured while creating new product.", ex.Message);
                 throw;
             }
             catch (Exception ex)
             {
-                _logger.Error("Something went wrong while creating new category.", ex.Message);
+                _logger.Error("Something went wrong while creating new product.", ex.Message);
                 throw;
             }
         }
 
-        public void UpdateCategory(CategoryForUpdateDto categoryToUpdate)
+        public void UpdateProduct(ProductForUpdateDTOs productForUpdate)
         {
             try
             {
-                var categoryEntity = _mapper.Map<Category>(categoryToUpdate);
+                var productEntity = _mapper.Map<Product>(productForUpdate);
 
-                _repository.Category.Update(categoryEntity);
+                _repository.Product.Update(productEntity);
+
                 _repository.SaveChanges();
             }
             catch (AutoMapperMappingException ex)
             {
-                _logger.Error($"There was an error mapping between Category and CategoryDto", ex.Message);
+                _logger.Error($"There was an error mapping betweenproduct and ProductDto", ex.Message);
                 throw;
             }
             catch (DbException ex)
@@ -133,11 +139,11 @@ namespace DiyorMarket.Service
             }
         }
 
-        public void DeleteCategory(int id)
+        public void DeleteProduct(int id)
         {
             try
             {
-                _repository.Category.Delete(id);
+                _repository.Product.Delete(id);
                 _repository.SaveChanges();
             }
             catch (DbException ex)

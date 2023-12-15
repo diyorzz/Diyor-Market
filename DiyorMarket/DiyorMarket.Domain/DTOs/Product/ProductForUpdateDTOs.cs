@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace DiyorMarket.Domain.DTOs.Product
 {
-    public record ProductDto(
+    public record ProductForUpdateDTOs(
         int Id,
         string Name,
-        DateTime ExpireDate,
-        decimal Price,
         string Description,
+        decimal Price,
+        DateTime ExpireDate,
         int CategoryId
-        );
+     );
 }
