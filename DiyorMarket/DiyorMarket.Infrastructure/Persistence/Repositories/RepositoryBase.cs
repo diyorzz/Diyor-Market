@@ -47,12 +47,6 @@ namespace DiyorMarket.Infrastructure.Persistence.Repositories
             var entity = _context.Set<T>()
                 .Find(id);
 
-            if (entity is null)
-            {
-                throw new EntityNotFoundException(
-                    $"Entity {typeof(T)} with id: {id} not found.");
-            }
-
             return entity;
         }
 

@@ -21,58 +21,25 @@ namespace DiyorMarket.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<CategoryDto>> GetCategories()
         {
-            try
-            {
-                var categories = _categoryService.GetCategories();
+            var categories = _categoryService.GetCategories();
 
-                return Ok(categories);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500,
-                    $"There was error returning categories. {ex.Message}");
-            }
+            return Ok(categories);
         }
 
         [HttpGet("{id}", Name = "GetCategoryById")]
         public ActionResult<CategoryDto> GetCategoryById(int id)
         {
-            try
-            {
-                var category = _categoryService.GetCategoryById(id);
+            var category = _categoryService.GetCategoryById(id);
 
-                if (category is null)
-                {
-                    return NotFound($"Category with id: {id} does not exist.");
-                }
-
-                return Ok(category);
-            }
-            catch (EntityNotFoundException)
-            {
-                return NotFound($"Product with id: {id} not found.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500,
-                    $"There was error getting category with id: {id}. {ex.Message}");
-            }
+            return Ok(category);
         }
 
         [HttpPost]
         public ActionResult<CategoryDto> CreateCategory([FromBody]CategoryForCreateDto category)
         {
-            try
-            {
-                var createdCategory = _categoryService.CreateCategory(category);
+            _categoryService.CreateCategory(category);
 
-                return StatusCode(201);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500,
-                    $"There was an error creating new category. {ex.Message}");
-            }
+            return StatusCode(201);
         }
 
         [HttpPut("{id}")]
@@ -84,35 +51,17 @@ namespace DiyorMarket.Controllers
                     $"Route id: {id} does not match with parameter id: {category.Id}.");
             }
 
-            try
-            {
-                _categoryService.UpdateCategory(category);
+            _categoryService.UpdateCategory(category);
 
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-
-                return StatusCode(500,
-                    $"There was an error updating category with id: {id}. {ex.Message}");
-
-            }
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
         public ActionResult DeleteCategoryAsync(int id)
         {
-            try
-            {
-                _categoryService.DeleteCategory(id);
+            _categoryService.DeleteCategory(id);
 
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500,
-                    $"There was an error deleting category with id: {id}. {ex.Message}");
-            }
+            return NoContent();
         }
     }
 }

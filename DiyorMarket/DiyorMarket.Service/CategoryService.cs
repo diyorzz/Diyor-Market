@@ -3,14 +3,9 @@ using DiyorMarket.Domain.DTOs.Category;
 using DiyorMarket.Domain.Enterfaces.Repositories;
 using DiyorMarket.Domain.Enterfaces.Services;
 using DiyorMarket.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+using DiyorMarket.Domain.Exceptions;
 using Microsoft.Extensions.Logging;
-using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DiyorMarket.Service
 {
@@ -28,115 +23,48 @@ namespace DiyorMarket.Service
 
         public CategoryDto CreateCategory(CategoryForCreateDto category)
         {
-            try
-            {
-                var categoryEntity = _mapper.Map<Category>(category);
-                _repository.Category.Create(categoryEntity);
-                _repository.SaveChanges();
+            var categoryEntity = _mapper.Map<Category>(category);
+            _repository.Category.Create(categoryEntity);
+            _repository.SaveChanges();
 
-                return _mapper.Map<CategoryDto>(categoryEntity);
-                    
-            }
-            catch (DbUpdateException ex)
-            {
-                _logger.LogError($"database error creating new category", ex);
-                throw;
-            }
-            catch(Exception ex) 
-            {
-                _logger.LogError("Error creating new category", ex);
-                throw;
-            }
+            return _mapper.Map<CategoryDto>(categoryEntity);
         }
 
         public void DeleteCategory(int id)
         {
-            try
-            {
-                _repository.Category.Delete(id);
-                _repository.SaveChanges();
-
-            }
-            catch (DbUpdateException ex)
-            {
-                _logger.LogError($"database error deleting  category with id: {id}", ex);
-                throw;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error deleting  category with id: {id}", ex);
-                throw;
-            }
+            _repository.Category.Delete(id);
+            _repository.SaveChanges();
         }
 
         public IEnumerable<CategoryDto> GetCategories()
         {
-            try
-            {
-                var categories=_repository.Category.FindAll();
+            var categories = _repository.Category.FindAll();
 
-                var categoryDTOs=_mapper.Map<IEnumerable<CategoryDto>>(categories);
+            var categoryDTOs = _mapper.Map<IEnumerable<CategoryDto>>(categories);
 
-                return categoryDTOs;
-
-
-            }
-            catch (DbUpdateException ex)
-            {
-                _logger.LogError($"Database error fetching categories", ex);
-                throw;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Error fatching categories", ex);
-                throw;
-            }
+            return categoryDTOs;
         }
 
         public CategoryDto GetCategoryById(int id)
         {
-            try
+            var category = _repository.Category.FindById(id);
+
+            if(category == null)
             {
-                var category = _repository.Category.FindById(id);
-
-                var categoryDTOs = _mapper.Map<CategoryDto>(category);
-
-                return categoryDTOs;
-
-
+                throw new EntityNotFoundException($"Category with id. {id} not found.");
             }
-            catch (DbUpdateException ex)
-            {
-                _logger.LogError($"database error fetching category with id: {id}", ex);
-                throw;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error fatching category with id: {id}", ex);
-                throw;
-            }
+
+            var categoryDTOs = _mapper.Map<CategoryDto>(category);
+
+            return categoryDTOs;
         }
 
         public void UpdateCategory(CategoryForUpdateDto category)
         {
-            try
-            {
-                var categoryEntity = _mapper.Map<Category>(category);
+            var categoryEntity = _mapper.Map<Category>(category);
 
-                _repository.Category.Update(categoryEntity);
-                _repository.SaveChanges();
-
-            }
-            catch (DbUpdateException ex)
-            {
-                _logger.LogError($"database error updating category with id: {category.Id}.", ex);
-                throw;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error updating category with id: {category.Id}.", ex);
-                throw;
-            }
+            _repository.Category.Update(categoryEntity);
+            _repository.SaveChanges();
         }
     }
 }

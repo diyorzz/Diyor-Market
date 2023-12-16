@@ -1,4 +1,5 @@
 using DiyorMarket.Extensions;
+using DiyorMarket.Middlewares;
 using Microsoft.AspNetCore.StaticFiles;
 using Serilog;
 
@@ -33,6 +34,8 @@ namespace DiyorMarket
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware<ErrorHendlerMiddlewares>();
 
             app.UseHttpsRedirection();
 
