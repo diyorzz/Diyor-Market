@@ -24,9 +24,6 @@ namespace DiyorMarket.Infrastructure.Persistence.Configurations
                 .IsRequired()
                 .HasMaxLength(255);
 
-            builder.Property(x => x.DateOfBirth)
-                .IsRequired();
-
             builder.Property(x => x.PhoneNumber)
                 .IsRequired()
                 .HasMaxLength(17);

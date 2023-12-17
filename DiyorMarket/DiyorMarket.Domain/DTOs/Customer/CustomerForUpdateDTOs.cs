@@ -10,6 +10,7 @@ namespace DiyorMarket.Domain.DTOs.Customer
         int Id,
         string FirstName,
         string LastName,
+        DateTime DateOfBirth,
         string Email,
         string PhoneNumber
         );

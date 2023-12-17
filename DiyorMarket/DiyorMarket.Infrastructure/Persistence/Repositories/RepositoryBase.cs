@@ -30,6 +30,12 @@ namespace DiyorMarket.Infrastructure.Persistence.Repositories
         {
             var entity = FindById(id);
 
+            if (entity == null)
+            {
+                throw new EntityNotFoundException(
+                    $"Entity {typeof(T)} with id: {id} not found.");
+            }
+
             _context.Set<T>().Remove(entity);
         }
 
@@ -53,6 +59,7 @@ namespace DiyorMarket.Infrastructure.Persistence.Repositories
         public void Update(T entity)
         {
             _context.Set<T>().Update(entity);
+
         }
     }
 }

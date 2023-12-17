@@ -9,6 +9,7 @@ namespace DiyorMarket.Domain.DTOs.Customer
     public record CustomerForCereateDTOs(
         string FirstName,
         string LastName,
+        DateTime DateOfBirth,
         string Email,
         string PhoneNumber
         );

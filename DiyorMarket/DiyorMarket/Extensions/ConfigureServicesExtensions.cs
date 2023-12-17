@@ -39,6 +39,9 @@ namespace DiyorMarket.Extensions
         public static IServiceCollection ConfigureServices(this IServiceCollection services)
         {
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICustomerService, CustomersServies>();
+            services.AddScoped<IProductService, ProductServies>();
+            services.AddScoped<ISaleService,SaleService>();
             return services;
         }
     }

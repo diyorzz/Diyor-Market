@@ -4,7 +4,6 @@ using DiyorMarket.Domain.Enterfaces.Repositories;
 using DiyorMarket.Domain.Enterfaces.Services;
 using DiyorMarket.Domain.Entities;
 using Microsoft.Extensions.Logging;
-using System.Data.Common;
 
 namespace DiyorMarket.Service
 {
@@ -12,14 +11,11 @@ namespace DiyorMarket.Service
     {
         private readonly IMapper _mapper;
         private readonly ICommonRepository _repository;
-        private readonly ILogger<CustomersServies> _logger;
 
-
-        public CustomersServies(IMapper mapper, ICommonRepository repository, ILogger<CustomersServies> logger)
+        public CustomersServies(IMapper mapper, ICommonRepository repository)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public IEnumerable<CustomerDtOs> GetCustomers()
@@ -42,13 +38,14 @@ namespace DiyorMarket.Service
 
         public CustomerDtOs CreateCustomer(CustomerForCereateDTOs customerToCreate)
         {
-            
-                var customerEntity = _mapper.Map<Customer>(customerToCreate);
 
-                _repository.Customer.Create(customerEntity);
-                _repository.SaveChanges();
+            var customerEntity = _mapper.Map<Customer>(customerToCreate);
 
-                 return _mapper.Map<CustomerDtOs>(customerEntity);
+            _repository.Customer.Create(customerEntity);
+            _repository.SaveChanges();
+
+            var cretedCustomer = _mapper.Map<CustomerDtOs>(customerEntity);
+            return cretedCustomer;
 
         }
 

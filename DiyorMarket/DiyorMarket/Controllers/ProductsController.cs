@@ -17,7 +17,7 @@ namespace DiyorMarket.Controllers
         {
             _productService = productService;
         }
-        // GET: api/<ProductController>
+
         [HttpGet]
         public ActionResult<IEnumerable<ProductDto>> Get()
         {
@@ -26,7 +26,6 @@ namespace DiyorMarket.Controllers
             return Ok(products);
         }
 
-        // GET api/<ProductController>/5
         [HttpGet("{id}")]
         public ActionResult<ProductDto> Get(int id)
         {
@@ -34,7 +33,6 @@ namespace DiyorMarket.Controllers
             return Ok(product);
         }
 
-        // POST api/<ProductController>
         [HttpPost]
         public ActionResult<ProductDto> Post([FromBody] ProductForCreateDTOs product)
         {
@@ -43,7 +41,6 @@ namespace DiyorMarket.Controllers
             return StatusCode(201);
         }
 
-        // PUT api/<ProductController>/5
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] ProductForUpdateDTOs product)
         {
@@ -51,7 +48,6 @@ namespace DiyorMarket.Controllers
             return NoContent();
         }
 
-        // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
