@@ -23,7 +23,6 @@ namespace DiyorMarket
             builder.Services.ConfigureLogger();
             builder.Services.ConfigureRipositories();
             builder.Services.ConfigureDatabaseContext();
-            builder.Services.ConfigureServices();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();

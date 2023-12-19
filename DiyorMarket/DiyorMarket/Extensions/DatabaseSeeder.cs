@@ -14,9 +14,49 @@ namespace DiyorMarket.Extensions
             var options = serviceProvider.GetRequiredService<DbContextOptions<DiyorMarketDbContext>>();
             using var context = new DiyorMarketDbContext(options);
 
+            CreateCategories(context);
             CreateProducts(context);
+            CreateCustomers(context);
+            CreateSales(context);
+            CreateSaleItems(context);
+            CreateSuppliers(context);
+            CreateSupplies(context);
+            CreateSupplyItems(context);
         }
+        private static void CreateCategories(DiyorMarketDbContext context)
+        {
+            if (context.Categories.Any()) return;
 
+            List<string> categoryNames = new();
+            List<Category> categories = new();
+
+            for (int i = 0; i < 100; i++)
+            {
+                var categoryName = _faker.Commerce
+                    .Categories(1)
+                    .First()
+                    .FirstLetterToUpper();
+                int attempts = 0;
+
+                while (categoryNames.Contains(categoryName) && attempts < 100)
+                {
+                    categoryName = _faker.Commerce
+                        .Categories(1)
+                        .First()
+                        .FirstLetterToUpper();
+                    attempts++;
+                }
+
+                categoryNames.Add(categoryName);
+                categories.Add(new Category
+                {
+                    Name = categoryName,
+                });
+            }
+
+            context.Categories.AddRange(categories);
+            context.SaveChanges();
+        }
         public static void CreateProducts(DiyorMarketDbContext context)
         {
             if (context.Products.Any()) return;
@@ -27,7 +67,7 @@ namespace DiyorMarket.Extensions
 
             foreach (var category in categories)
             {
-                var productsCount = new Random().Next(5, 35);
+                var productsCount = new Random().Next(20, 100);
 
                 for (int i = 0; i < productsCount; i++)
                 {
@@ -54,6 +94,153 @@ namespace DiyorMarket.Extensions
                     });
                 }
             }
+            context.Products.AddRange(products);
+            context.SaveChanges();
+        }
+        private static void CreateCustomers(DiyorMarketDbContext context)
+        {
+            if (context.Customers.Any()) return;
+            List<Customer> customers = new List<Customer>();
+
+            for (int i = 0; i < 1000; i++)
+            {
+                customers.Add(new Customer()
+                {
+                    FirstName = _faker.Name.FirstName(),
+                    LastName = _faker.Name.LastName(),
+                    PhoneNumber = _faker.Phone.PhoneNumber("+998-(##) ###-##-##")
+                });
+            }
+
+            context.Customers.AddRange(customers);
+            context.SaveChanges();
+        }
+        private static void CreateSales(DiyorMarketDbContext context)
+        {
+            if (context.Sales.Any()) return;
+
+            var customers = context.Customers.ToList();
+            List<Sale> sales = new List<Sale>();
+
+            foreach (var customer in customers)
+            {
+                int salesCount = new Random().Next(50, 250);
+                for (int i = 0; i < salesCount; i++)
+                {
+                    sales.Add(new Sale()
+                    {
+                        CustomerId = customer.Id,
+                        SaleDate = _faker.Date.Between(DateTime.Now.AddYears(-2), DateTime.Now),
+                    });
+                }
+            }
+
+            context.Sales.AddRange(sales);
+            context.SaveChanges();
+        }
+        private static void CreateSaleItems(DiyorMarketDbContext context)
+        {
+            if (context.SalesItems.Any()) return;
+
+            var sales = context.Sales.ToList();
+            var products = context.Products.ToList();
+            List<SaleItem> saleItems = new List<SaleItem>();
+
+            foreach (var sale in sales)
+            {
+                int saleItemsCount = new Random().Next(5, 50);
+
+                for (int i = 0; i < saleItemsCount; i++)
+                {
+                    var randomProduct = _faker.PickRandom(products);
+
+                    var quantity = new Random().Next(1, 50);
+
+                    saleItems.Add(new SaleItem()
+                    {
+                        ProductId = randomProduct.Id,
+                        SaleId = sale.Id,
+                        Quantity = quantity,
+                        UnitPrice = randomProduct.Price,
+                    });
+                }
+            }
+
+            context.SalesItems.AddRange(saleItems);
+            context.SaveChanges();
+        }
+        private static void CreateSuppliers(DiyorMarketDbContext context)
+        {
+            if (context.Suppliers.Any()) return;
+            List<Supplier> suppliers = new List<Supplier>();
+
+            for (int i = 0; i < 125; i++)
+            {
+                suppliers.Add(new Supplier()
+                {
+                    FirstName = _faker.Name.FirstName(),
+                    LastName = _faker.Name.LastName(),
+                    PhoneNumber = _faker.Phone.PhoneNumber("+998-(##) ###-##-##"),
+                    Company = _faker.Company.CompanyName(),
+                });
+            }
+            context.Suppliers.AddRange(suppliers);
+            context.SaveChanges();
+        }
+        private static void CreateSupplies(DiyorMarketDbContext context)
+        {
+            if (context.Supllies.Any()) return;
+
+            var suppliers = context.Suppliers.ToList();
+            List<Supply> supplies = new List<Supply>();
+
+            foreach (var supplier in suppliers)
+            {
+                int suppliesCount = new Random().Next(5, 50);
+                for (int i = 0; i < suppliesCount; i++)
+                {
+                    supplies.Add(new Supply()
+                    {
+                        SupplierId = supplier.Id,
+                        SupplyDate = _faker.Date.Between(DateTime.Now.AddYears(-2), DateTime.Now),
+                    });
+                }
+            }
+
+            context.Supllies.AddRange(supplies);
+            context.SaveChanges();
+        }
+        private static void CreateSupplyItems(DiyorMarketDbContext context)
+        {
+            if (context.SupliesItems.Any()) return;
+
+            var supplies = context.SupliesItems.ToList();
+            var products = context.Products.ToList();
+            List<SupplyItem> supplyItems = new List<SupplyItem>();
+
+            foreach (var supply in supplies)
+            {
+                int supplyItemsCount = new Random().Next(1, 20);
+
+                for (int i = 0; i < supplyItemsCount; i++)
+                {
+                    var randomProduct = _faker.PickRandom(products);
+
+                    var quantity = new Random().Next(1, 50);
+
+                    supplyItems.Add(new SupplyItem()
+                    {
+                        ProductId = randomProduct.Id,
+                        SupplyId = supply.Id,
+                        Quantity = quantity,
+                        UnitPrice = randomProduct.Price
+                    });
+                }
+            }
+
+            context.SupliesItems.AddRange(supplyItems);
+            context.SaveChanges();
         }
     }
 }
+

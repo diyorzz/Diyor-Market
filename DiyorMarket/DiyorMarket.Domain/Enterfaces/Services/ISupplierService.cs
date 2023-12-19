@@ -2,7 +2,7 @@
 
 namespace DiyorMarket.Domain.Enterfaces.Services
 {
-    public interface  ISupplier
+    public interface  ISupplierService
     {
         IEnumerable<SupplierDTOs> GetSupplier();
         SupplierDTOs? GetSupplierById(int id);

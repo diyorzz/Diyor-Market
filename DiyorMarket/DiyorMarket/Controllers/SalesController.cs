@@ -1,4 +1,5 @@
-﻿using DiyorMarket.Domain.DTOs.Sale;
+﻿using DiyorMarket.Domain.DTOs.Product;
+using DiyorMarket.Domain.DTOs.Sale;
 using DiyorMarket.Domain.Enterfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +30,7 @@ namespace DiyorMarket.Controllers
         public ActionResult<SaleDTOs> Get(int id)
         {
             var sales=_saleService.GetSaleById(id);
+
             return Ok(sales);
         }
 
@@ -36,6 +38,7 @@ namespace DiyorMarket.Controllers
         public ActionResult<SaleDTOs> Post([FromBody] SaleForCreateDTOs saleFor)
         {
             _saleService.CreateSale(saleFor);
+
             return StatusCode(201);
         }
 
@@ -43,6 +46,7 @@ namespace DiyorMarket.Controllers
         public ActionResult Put(int id, [FromBody] SaleForUpdateDTOs sale)
         {
             _saleService.UpdateSale(sale);
+
             return NoContent();
         }
 
@@ -50,6 +54,7 @@ namespace DiyorMarket.Controllers
         public ActionResult Delete(int id)
         {
             _saleService.DeleteSale(id);
+
             return NoContent();
         }
     }

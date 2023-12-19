@@ -2,9 +2,9 @@
 
 namespace DiyorMarket.Domain.Enterfaces.Services
 {
-    public interface ISuppyItem
+    public interface ISuppyItemService
     {
-        IEnumerable<SupplyItemDTOs> GetCategories();
+        IEnumerable<SupplyItemDTOs> GetSupplyItems();
         SupplyItemDTOs? GetSupplyItemById(int id);
         SupplyItemDTOs CreateSuppyItem(SupplyItemForCreateDTOs supplyItemForCreate);
         void UpdateSupplyItem(SupplyItemForUpdateDTOs supplyItemForUpdate);
