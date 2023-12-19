@@ -1,11 +1,6 @@
 ﻿using DiyorMarket.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DiyorMarket.Infrastructure.Persistence.Configurations
 {
@@ -14,10 +9,8 @@ namespace DiyorMarket.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Supply> builder)
         {
             builder.ToTable(nameof(Supply));
-            builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.SupplyDate)
-                .IsRequired();
+            builder.HasKey(s => s.Id);
 
             builder.HasOne(s => s.Supplier)
                 .WithMany(sp => sp.Supplies)

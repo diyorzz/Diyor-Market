@@ -1,11 +1,6 @@
 ﻿using DiyorMarket.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DiyorMarket.Infrastructure.Persistence.Configurations
 {
@@ -20,18 +15,20 @@ namespace DiyorMarket.Infrastructure.Persistence.Configurations
             builder.Property(s => s.FirstName)
                 .IsRequired()
                 .HasMaxLength(255);
+
             builder.Property(s => s.LastName)
                 .HasMaxLength(255);
+
             builder.Property(s => s.PhoneNumber)
-                .IsRequired()
-                .HasMaxLength(17);
+                .HasMaxLength(255);
+
             builder.Property(s => s.Company)
                 .IsRequired()
-                .HasMaxLength(150);
+                .HasMaxLength(255);
 
-            builder.HasMany(sp => sp.Supplies)
-                .WithOne(s => s.Supplier)
-                .HasForeignKey(s => s.SupplierId);
+            builder.HasMany(s => s.Supplies)
+                .WithOne(sp => sp.Supplier)
+                .HasForeignKey(sp => sp.SupplierId);
         }
     }
 }

@@ -1,10 +1,4 @@
-﻿using DiyorMarket.Domain.DTOs.Category;
-using DiyorMarket.Domain.DTOs.Supplier;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DiyorMarket.Domain.DTOs.Supplier;
 
 namespace DiyorMarket.Domain.Enterfaces.Services
 {

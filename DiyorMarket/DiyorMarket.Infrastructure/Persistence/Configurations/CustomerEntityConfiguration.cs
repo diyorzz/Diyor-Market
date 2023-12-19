@@ -1,11 +1,6 @@
 ﻿using DiyorMarket.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DiyorMarket.Infrastructure.Persistence.Configurations
 {
@@ -15,18 +10,19 @@ namespace DiyorMarket.Infrastructure.Persistence.Configurations
         {
             builder.ToTable(nameof(Customer));
 
-            builder.HasKey(x => x.Id);
+            builder.HasKey(c => c.Id);
 
-            builder.Property(x => x.FirstName)
+            builder.Property(c => c.FirstName)
                 .IsRequired()
                 .HasMaxLength(255);
-            builder.Property(x => x.LastName)
-                .IsRequired()
+            builder.Property(c => c.LastName)
+                .HasMaxLength(255);
+            builder.Property(c => c.PhoneNumber)
                 .HasMaxLength(255);
 
-            builder.Property(x => x.PhoneNumber)
-                .IsRequired()
-                .HasMaxLength(17);
+            builder.HasMany(c => c.Sales)
+                .WithOne(s => s.Customer)
+                .HasForeignKey(s => s.CustomerId);
         }
     }
 }

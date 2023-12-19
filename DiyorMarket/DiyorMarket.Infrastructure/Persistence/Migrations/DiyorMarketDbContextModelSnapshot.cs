@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DiyorMarket.Infrastructure.Migrations
+namespace DiyorMarket.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(DiyorMarketDbContext))]
     partial class DiyorMarketDbContextModelSnapshot : ModelSnapshot
@@ -51,13 +51,6 @@ namespace DiyorMarket.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -70,8 +63,8 @@ namespace DiyorMarket.Infrastructure.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(17)
-                        .HasColumnType("nvarchar(17)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
@@ -145,7 +138,7 @@ namespace DiyorMarket.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("SaleId")
                         .HasColumnType("int");
@@ -172,8 +165,8 @@ namespace DiyorMarket.Infrastructure.Migrations
 
                     b.Property<string>("Company")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -187,8 +180,8 @@ namespace DiyorMarket.Infrastructure.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(17)
-                        .HasColumnType("nvarchar(17)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
@@ -234,7 +227,7 @@ namespace DiyorMarket.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("UnitPrice")
-                        .HasColumnType("money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -270,7 +263,7 @@ namespace DiyorMarket.Infrastructure.Migrations
             modelBuilder.Entity("DiyorMarket.Domain.Entities.SaleItem", b =>
                 {
                     b.HasOne("DiyorMarket.Domain.Entities.Product", "Product")
-                        .WithMany()
+                        .WithMany("SaleItems")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -300,7 +293,7 @@ namespace DiyorMarket.Infrastructure.Migrations
             modelBuilder.Entity("DiyorMarket.Domain.Entities.SupplyItem", b =>
                 {
                     b.HasOne("DiyorMarket.Domain.Entities.Product", "Product")
-                        .WithMany()
+                        .WithMany("SupplyItems")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -324,6 +317,13 @@ namespace DiyorMarket.Infrastructure.Migrations
             modelBuilder.Entity("DiyorMarket.Domain.Entities.Customer", b =>
                 {
                     b.Navigation("Sales");
+                });
+
+            modelBuilder.Entity("DiyorMarket.Domain.Entities.Product", b =>
+                {
+                    b.Navigation("SaleItems");
+
+                    b.Navigation("SupplyItems");
                 });
 
             modelBuilder.Entity("DiyorMarket.Domain.Entities.Sale", b =>

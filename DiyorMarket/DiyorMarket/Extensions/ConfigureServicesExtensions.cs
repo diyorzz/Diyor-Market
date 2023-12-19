@@ -2,7 +2,6 @@
 using DiyorMarket.Domain.Enterfaces.Services;
 using DiyorMarket.Infrastructure.Persistence;
 using DiyorMarket.Infrastructure.Persistence.Repositories;
-using DiyorMarket.Service;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -38,10 +37,10 @@ namespace DiyorMarket.Extensions
 
         public static IServiceCollection ConfigureServices(this IServiceCollection services)
         {
-            services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<ICustomerService, CustomersServies>();
-            services.AddScoped<IProductService, ProductServies>();
-            services.AddScoped<ISaleService,SaleService>();
+            //services.AddScoped<ICategoryService, CategoryService>();
+            //services.AddScoped<ICustomerService, CustomersServies>();
+            //services.AddScoped<IProductService, ProductServies>();
+            //services.AddScoped<ISaleService,SaleService>();
             return services;
         }
     }

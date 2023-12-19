@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DiyorMarket.Domain.DTOs.SaleItam;
+using DiyorMarket.Domain.Entities;
 
 namespace DiyorMarket.Domain.Mappings
 {
@@ -11,7 +8,10 @@ namespace DiyorMarket.Domain.Mappings
     {
         public SaleItemMappings()
         {
-
+            CreateMap<SaleItemDTOs, SaleItem>();
+            CreateMap<SaleItem, SaleItemDTOs>();
+            CreateMap<SaleItemForCreateDTOs, SaleItem>();
+            CreateMap<SaleItemForUpdateDTOs, SaleItem>();
         }
     }
 }

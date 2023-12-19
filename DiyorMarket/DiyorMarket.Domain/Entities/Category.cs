@@ -12,10 +12,5 @@ namespace DiyorMarket.Domain.Entities
         public string Name { get; set; }=string.Empty;
         public int NumberOfProducts { get; set; }
         public virtual ICollection<Product> Products { get; set; }
-
-        public Category()
-        {
-            Products = new List<Product>();
-        }
     }
 }

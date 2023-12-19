@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using DiyorMarket.Domain.DTOs.Sale;
+using DiyorMarket.Domain.Entities;
 
 namespace DiyorMarket.Domain.Mappings
 {
-    public class SaleMappings
+    public class SaleMappings : Profile
     {
-
+        public SaleMappings()
+        {
+            CreateMap<SaleDTOs, Sale>();
+            CreateMap<Sale, SaleDTOs>();
+            CreateMap<SaleForCreateDTOs, Sale>();
+            CreateMap<SaleForUpdateDTOs, Sale>();
+        }
     }
 }

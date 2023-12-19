@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace DiyorMarket.Domain.DTOs.Category
 {
-    public record CategoryDto(
-        int Id,
-        string Name,
-        int NumberOfProducts,
-        ICollection<ProductDto>Products);
+    public class CategoryDTOs
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int NumberOfProducts { get; set; }
+        public ICollection<ProductDto> Products { get; set; } = new List<ProductDto>();
+    }
 }

@@ -1,7 +1,4 @@
-﻿using DiyorMarket.Domain.DTOs.Category;
-using DiyorMarket.Domain.DTOs.Supply;
-using System;
-
+﻿using DiyorMarket.Domain.DTOs.Supply;
 
 namespace DiyorMarket.Domain.Enterfaces.Services
 {

@@ -18,7 +18,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<CategoryDto>> GetCategories()
+        public ActionResult<IEnumerable<CategoryDTOs>> GetCategories()
         {
             var categories = _categoryService.GetCategories();
 
@@ -26,7 +26,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet("{id}", Name = "GetCategoryById")]
-        public ActionResult<CategoryDto> GetCategoryById(int id)
+        public ActionResult<CategoryDTOs> GetCategoryById(int id)
         {
             var category = _categoryService.GetCategoryById(id);
 
@@ -34,7 +34,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpPost]
-        public ActionResult<CategoryDto> CreateCategory([FromBody]CategoryForCreateDto category)
+        public ActionResult<CategoryDTOs> CreateCategory([FromBody]CategoryForCreateDto category)
         {
             _categoryService.CreateCategory(category);
 

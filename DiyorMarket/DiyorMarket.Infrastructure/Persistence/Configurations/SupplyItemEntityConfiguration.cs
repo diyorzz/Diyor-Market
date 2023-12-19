@@ -1,11 +1,6 @@
 ﻿using DiyorMarket.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DiyorMarket.Infrastructure.Persistence.Configurations
 {
@@ -14,15 +9,22 @@ namespace DiyorMarket.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<SupplyItem> builder)
         {
             builder.ToTable(nameof(SupplyItem));
-            builder.Property(sui => sui.Quantity)
-                .IsRequired();
-            builder.Property(sui => sui.UnitPrice)
-                .IsRequired()
-                .HasColumnType("money");
 
-            builder.HasOne(s => s.Supply)
-                .WithMany(sui => sui.SupplyItems)
-                .HasForeignKey(sui => sui.SupplyId);
+            builder.HasKey(si => si.Id);
+
+            builder.Property(si => si.Quantity)
+                .IsRequired();
+
+            builder.Property(si => si.UnitPrice)
+                .IsRequired();
+
+            builder.HasOne(si => si.Supply)
+                .WithMany(s => s.SupplyItems)
+                .HasForeignKey(si => si.SupplyId);
+
+            builder.HasOne(si => si.Product)
+                .WithMany(p => p.SupplyItems)
+                .HasForeignKey(si => si.ProductId);
         }
     }
 }
