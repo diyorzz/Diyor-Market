@@ -3,6 +3,8 @@ using DiyorMarket.Domain.DTOs.SaleItam;
 using DiyorMarket.Domain.Enterfaces.Services;
 using DiyorMarket.Domain.Entities;
 using DiyorMarket.Domain.Exceptions;
+using DiyorMarket.Domain.Pagination;
+using DiyorMarket.Domain.ResourceParameters;
 using DiyorMarket.Infrastructure.Persistence;
 
 namespace DiyorMarket.Services
@@ -15,6 +17,37 @@ namespace DiyorMarket.Services
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
+        }
+        public PaginatedList<SaleItemDTOs> GetSaleItems(SaleItemResorseParametrs parametrs)
+        {
+            var query = _context.SalesItems.AsQueryable();
+
+            if (parametrs.ProductId is not null)
+            {
+                query = query.Where(x => x.ProductId == parametrs.ProductId);
+            }
+            if(parametrs.SaleId is not null)
+            {
+                query = query.Where(x => x.SaleId == parametrs.SaleId);
+            }
+            if(parametrs.QuantityLessThan is not null)
+            {
+                query = query.Where(x => x.UnitPrice < parametrs.QuantityLessThan);
+            }
+            if(parametrs.QuantityGreaterThan is not null)
+            {
+                query=query.Where(x=>x.UnitPrice > parametrs.QuantityGreaterThan);
+            }
+            if (!string.IsNullOrEmpty(parametrs.OrderBy))
+            {
+                query = parametrs.OrderBy.ToLowerInvariant() switch
+                {
+                   
+                };
+            }
+
+
+           
         }
 
         public SaleItemDTOs CreateSaleItem(SaleItemForCreateDTOs saleItemForCreate)
@@ -47,13 +80,6 @@ namespace DiyorMarket.Services
             }
 
             return _mapper.Map<SaleItemDTOs?>(saleItem);  
-        }
-
-        public IEnumerable<SaleItemDTOs> GetSaleItems()
-        {
-            var SaleItems = _context.SalesItems.ToList();
-
-            return _mapper.Map<IEnumerable<SaleItemDTOs>>(SaleItems); 
         }
 
         public void UpdateSaleItem(SaleItemForUpdateDTOs saleItemForUpdate)

@@ -14,13 +14,13 @@ namespace DiyorMarket.Extensions
             var options = serviceProvider.GetRequiredService<DbContextOptions<DiyorMarketDbContext>>();
             using var context = new DiyorMarketDbContext(options);
 
-            CreateCategories(context);
-            CreateProducts(context);
-            CreateCustomers(context);
-            CreateSales(context);
-            CreateSaleItems(context);
-            CreateSuppliers(context);
-            CreateSupplies(context);
+            //CreateCategories(context);
+            //CreateProducts(context);
+            //CreateCustomers(context);
+            //CreateSales(context);
+            //CreateSaleItems(context);
+            //CreateSuppliers(context);
+            //CreateSupplies(context);
             CreateSupplyItems(context);
         }
         private static void CreateCategories(DiyorMarketDbContext context)
@@ -214,19 +214,20 @@ namespace DiyorMarket.Extensions
         {
             if (context.SupliesItems.Any()) return;
 
-            var supplies = context.SupliesItems.ToList();
+            var supplyitems = context.Supllies.ToList();
             var products = context.Products.ToList();
+
             List<SupplyItem> supplyItems = new List<SupplyItem>();
 
-            foreach (var supply in supplies)
+            foreach (var supply in supplyitems)
             {
-                int supplyItemsCount = new Random().Next(1, 20);
+                int supplyItemsCount = new Random().Next(1, 10);
 
                 for (int i = 0; i < supplyItemsCount; i++)
                 {
                     var randomProduct = _faker.PickRandom(products);
 
-                    var quantity = new Random().Next(1, 50);
+                    var quantity = new Random().Next(1, 10);
 
                     supplyItems.Add(new SupplyItem()
                     {
@@ -237,7 +238,6 @@ namespace DiyorMarket.Extensions
                     });
                 }
             }
-
             context.SupliesItems.AddRange(supplyItems);
             context.SaveChanges();
         }

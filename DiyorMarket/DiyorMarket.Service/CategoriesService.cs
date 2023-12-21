@@ -3,6 +3,8 @@ using DiyorMarket.Domain.DTOs.Category;
 using DiyorMarket.Domain.Enterfaces.Services;
 using DiyorMarket.Domain.Entities;
 using DiyorMarket.Domain.Exceptions;
+using DiyorMarket.Domain.Pagination;
+using DiyorMarket.Domain.ResourceParameters;
 using DiyorMarket.Infrastructure.Persistence;
 
 namespace DiyorMarket.Services
@@ -11,6 +13,29 @@ namespace DiyorMarket.Services
     {
         private readonly IMapper _mapper;
         private readonly DiyorMarketDbContext _context;
+        public PaginatedList<CategoryDTOs> GetCategories(CategoryResourseParametrs parameters)
+        {
+            var query = _context.Categories.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(parameters.SearchString))
+            {
+                query = query.Where(x => x.Name.Contains(parameters.SearchString));
+            }
+            if (!string.IsNullOrEmpty(parameters.OrderBy))
+            {
+                query = parameters.OrderBy.ToLowerInvariant() switch
+                {
+                    "name" => query.OrderBy(x => x.Name),
+                    "namedesc" => query.OrderByDescending(x => x.Name),
+                    _ => query.OrderBy(x => x.Id),
+                };
+            }
+            var category = query.ToPaginatedList(parameters.Pagesize, parameters.PageNumber);
+
+            var categryDTO = _mapper.Map<List<CategoryDTOs>>(category);
+
+            return new PaginatedList<CategoryDTOs>(categryDTO, category.TotalCount, category.CurrentPage, category.PageSize);
+        }
 
         public CategoriesService(IMapper mapper, DiyorMarketDbContext context)
         {
@@ -37,12 +62,6 @@ namespace DiyorMarket.Services
                 _context.SaveChanges();
             }
         }
-        public IEnumerable<CategoryDTOs> GetCategories()
-        {
-            var categories = _context.Categories.ToList();
-
-            return _mapper.Map<IEnumerable<CategoryDTOs>>(categories);
-        }
 
         public CategoryDTOs? GetCategoryById(int id)
         {
@@ -63,5 +82,6 @@ namespace DiyorMarket.Services
             _context.Categories.Update(categoryEntity);
             _context.SaveChanges();
         }
+
     }
 }

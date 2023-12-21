@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using DiyorMarket.Domain.DTOs.Customer;
+using DiyorMarket.Domain.DTOs.Product;
 using DiyorMarket.Domain.Enterfaces.Services;
 using DiyorMarket.Domain.Entities;
 using DiyorMarket.Domain.Exceptions;
+using DiyorMarket.Domain.Pagination;
+using DiyorMarket.Domain.ResourceParameters;
 using DiyorMarket.Infrastructure.Persistence;
 
 namespace DiyorMarket.Services
@@ -15,6 +18,32 @@ namespace DiyorMarket.Services
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
+        }
+        public PaginatedList<CustomerDtOs> GetCustomers(CustomerResourceParameters parameters)
+        {
+            var query = _context.Customers.AsQueryable();
+
+            if(!string.IsNullOrWhiteSpace(parameters.SearchString))
+            {
+                query = query.Where(x => x.FirstName.Contains(parameters.SearchString)
+                    || x.LastName.Contains(parameters.SearchString));
+            }
+            if (!string.IsNullOrEmpty(parameters.OrderBy))
+            {
+                query = parameters.OrderBy.ToLowerInvariant() switch
+                {
+                    "firstname" => query.OrderBy(x => x.FirstName),
+                    "firstnamedesc" => query.OrderByDescending(x => x.FirstName),
+                    "lastname" => query.OrderBy(x => x.LastName),
+                    "lastnamedesc" => query.OrderByDescending(x => x.LastName),
+                    _ => query.OrderBy(x => x.Id),
+                };
+            }
+            var customer = query.ToPaginatedList(parameters.Pagesize, parameters.PageNumber);
+
+            var customerDTO = _mapper.Map<List<CustomerDtOs>>(customer);
+
+            return new PaginatedList<CustomerDtOs>(customerDTO, customer.TotalCount, customer.CurrentPage, customer.PageSize);
         }
 
         public CustomerDtOs CreateCustomer(CustomerForCereateDTOs customerForCereate)
@@ -48,13 +77,6 @@ namespace DiyorMarket.Services
             }
 
             return _mapper.Map<CustomerDtOs>(customers);
-        }
-
-        public IEnumerable<CustomerDtOs> GetCustomers()
-        {
-            var customers=_context.Customers.ToList();
-
-            return _mapper.Map<IEnumerable<CustomerDtOs>>(customers);
         }
 
         public void UpdateCustomer(CustomerForUpdateDTOs customerForUpdate)

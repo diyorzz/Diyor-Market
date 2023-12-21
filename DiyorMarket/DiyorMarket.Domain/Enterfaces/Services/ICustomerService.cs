@@ -1,10 +1,12 @@
 ﻿using DiyorMarket.Domain.DTOs.Customer;
+using DiyorMarket.Domain.Pagination;
+using DiyorMarket.Domain.ResourceParameters;
 
 namespace DiyorMarket.Domain.Enterfaces.Services
 {
     public interface  ICustomerService
     {
-        IEnumerable<CustomerDtOs> GetCustomers();
+        PaginatedList<CustomerDtOs> GetCustomers(CustomerResourceParameters parameters);
         CustomerDtOs? GetCustomerById(int id);
         CustomerDtOs CreateCustomer(CustomerForCereateDTOs customerForCereate);
         void UpdateCustomer(CustomerForUpdateDTOs customerForUpdate);

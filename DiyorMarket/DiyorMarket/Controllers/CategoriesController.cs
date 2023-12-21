@@ -1,6 +1,10 @@
 ﻿using DiyorMarket.Domain.DTOs.Category;
+using DiyorMarket.Domain.DTOs.Customer;
 using DiyorMarket.Domain.Enterfaces.Services;
+using DiyorMarket.Domain.Pagination;
+using DiyorMarket.Domain.ResourceParameters;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,9 +22,13 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<CategoryDTOs>> GetCategories()
+        public ActionResult<IEnumerable<CategoryDTOs>> GetCategories([FromQuery] CategoryResourseParametrs category)
         {
-            var categories = _categoryService.GetCategories();
+            var categories = _categoryService.GetCategories(category);
+
+            var metaData = GetPaginationMetaData(categories);
+
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metaData));
 
             return Ok(categories);
         }
@@ -34,7 +42,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpPost]
-        public ActionResult<CategoryDTOs> CreateCategory([FromBody]CategoryForCreateDto category)
+        public ActionResult<CategoryDTOs> CreateCategory([FromBody] CategoryForCreateDto category)
         {
             _categoryService.CreateCategory(category);
 
@@ -61,6 +69,16 @@ namespace DiyorMarket.Controllers
             _categoryService.DeleteCategory(id);
 
             return NoContent();
+        }
+        private PagenationMetaData GetPaginationMetaData(PaginatedList<CategoryDTOs> customerDtOs)
+        {
+            return new PagenationMetaData
+            {
+                Totalcount = customerDtOs.TotalCount,
+                PageSize = customerDtOs.PageSize,
+                CurrentPage = customerDtOs.CurrentPage,
+                TotalPages = customerDtOs.TotalPages,
+            };
         }
     }
 }

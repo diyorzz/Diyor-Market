@@ -1,10 +1,12 @@
 ﻿using DiyorMarket.Domain.DTOs.SaleItam;
+using DiyorMarket.Domain.Pagination;
+using DiyorMarket.Domain.ResourceParameters;
 
 namespace DiyorMarket.Domain.Enterfaces.Services
 {
     public interface  ISaleItemService
     {
-        IEnumerable<SaleItemDTOs> GetSaleItems();
+        PaginatedList<SaleItemDTOs> GetSaleItems(SaleItemResorseParametrs parametrs);
         SaleItemDTOs? GetSaleItemById(int id);
         SaleItemDTOs CreateSaleItem(SaleItemForCreateDTOs saleItemForCreate);
         void UpdateSaleItem(SaleItemForUpdateDTOs saleItemForUpdate);

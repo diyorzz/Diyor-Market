@@ -1,17 +1,11 @@
 ﻿
 namespace DiyorMarket.Domain.ResourceParameters
 {
-    public class ProductResourceParameters
+    public class CategoryResourseParametrs
     {
-        private const int MaxPageSize = 25;
-        public int? CategoryId { get; set; }
+        private const int MaxPageSize = 20;
         public string? SearchString { get; set; }
-        public decimal? Price { get; set; } 
-        public decimal? PriceLessThan {  get; set; }
-        public decimal? PriceGraterThan { get; set; }
         public string OrderBy { get; set; } = "name";
-
-
         public int PageNumber { get; set; } = 1;
 
         private int _pageSize = 15;
