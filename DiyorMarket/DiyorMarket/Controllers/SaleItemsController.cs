@@ -1,7 +1,10 @@
 ﻿using DiyorMarket.Domain.DTOs.Product;
 using DiyorMarket.Domain.DTOs.SaleItam;
 using DiyorMarket.Domain.Enterfaces.Services;
+using DiyorMarket.Domain.Pagination;
+using DiyorMarket.Domain.ResourceParameters;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,12 +22,17 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<SaleItemDTOs>> Get()
+        public ActionResult<IEnumerable<SaleItemDTOs>> Get([FromQuery]
+        SaleItemResorseParametrs parametrs)
         {
-            var saleitems=_saleItemService.GetSaleItems();
+            var saleitems=_saleItemService.GetSaleItems(parametrs);
+
+            var metaData = GetPaginationMetaData(saleitems);
+
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metaData));
+
             return Ok(saleitems);
         }
-
         [HttpGet("{id}")]
         public ActionResult<SaleItemDTOs> Get(int id)
         {
@@ -52,5 +60,22 @@ namespace DiyorMarket.Controllers
             _saleItemService.DeleteSaleItem(id);
             return NoContent();
         }
+        private PagenationMetaData GetPaginationMetaData(PaginatedList<SaleItemDTOs> saleItemDtOs)
+        {
+            return new PagenationMetaData
+            {
+                Totalcount = saleItemDtOs.TotalCount,
+                PageSize = saleItemDtOs.PageSize,
+                CurrentPage = saleItemDtOs.CurrentPage,
+                TotalPages = saleItemDtOs.TotalPages,
+            };
+        }
+    }
+    class PagenationMetaData
+    {
+        public int Totalcount { get; set; }
+        public int PageSize { get; set; }
+        public int CurrentPage { get; set; }
+        public int TotalPages { get; set; }
     }
 }

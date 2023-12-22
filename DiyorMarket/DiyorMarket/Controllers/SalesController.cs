@@ -1,6 +1,8 @@
-﻿using DiyorMarket.Domain.DTOs.Product;
-using DiyorMarket.Domain.DTOs.Sale;
+﻿using DiyorMarket.Domain.DTOs.Sale;
+using DiyorMarket.Domain.DTOs.SaleItam;
 using DiyorMarket.Domain.Enterfaces.Services;
+using DiyorMarket.Domain.Pagination;
+using DiyorMarket.Domain.ResourceParameters;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -19,9 +21,11 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<SaleDTOs>> Get()
+        public ActionResult<IEnumerable<SaleDTOs>> Get(SaleResourseParametrs parametrs)
         {
-            var sales = _saleService.Getsales();
+            var sales = _saleService.Getsales(parametrs);
+
+
 
             return Ok(sales);
         }
@@ -56,6 +60,16 @@ namespace DiyorMarket.Controllers
             _saleService.DeleteSale(id);
 
             return NoContent();
+        }
+        private PagenationMetaData GetPaginationMetaData(PaginatedList<SaleDTOs> saleDtOs)
+        {
+            return new PagenationMetaData
+            {
+                Totalcount = saleDtOs.TotalCount,
+                PageSize = saleDtOs.PageSize,
+                CurrentPage = saleDtOs.CurrentPage,
+                TotalPages = saleDtOs.TotalPages,
+            };
         }
     }
 }
