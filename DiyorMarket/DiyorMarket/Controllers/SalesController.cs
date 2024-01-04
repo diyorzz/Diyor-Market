@@ -1,9 +1,9 @@
 ﻿using DiyorMarket.Domain.DTOs.Sale;
-using DiyorMarket.Domain.DTOs.SaleItam;
 using DiyorMarket.Domain.Enterfaces.Services;
 using DiyorMarket.Domain.Pagination;
 using DiyorMarket.Domain.ResourceParameters;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,7 +25,9 @@ namespace DiyorMarket.Controllers
         {
             var sales = _saleService.Getsales(parametrs);
 
+            var metaData = GetPaginationMetaData(sales);
 
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metaData));
 
             return Ok(sales);
         }

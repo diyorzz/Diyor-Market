@@ -7,6 +7,7 @@ using DiyorMarket.Domain.Exceptions;
 using DiyorMarket.Domain.Pagination;
 using DiyorMarket.Domain.ResourceParameters;
 using DiyorMarket.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiyorMarket.Services
 {

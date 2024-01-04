@@ -42,12 +42,20 @@ namespace DiyorMarket.Services
             {
                 query = parametrs.OrderBy.ToLowerInvariant() switch
                 {
-                   
+                    "saleId" => query.OrderBy(x => x.SaleId),
+                    "saleIddesc" => query.OrderByDescending(x => x.SaleId),
+                    "productId" => query.OrderBy(x => x.ProductId),
+                    "productIddesc" => query.OrderByDescending(x => x.ProductId),
+                    "unitPrice" => query.OrderBy(x => x.UnitPrice),
+                    "unitPricedesc" => query.OrderByDescending(x => x.UnitPrice),
+                    _ => query.OrderBy(x => x.Id),
                 };
             }
+            var saleItems = query.ToPaginatedList(parametrs.Pagesize, parametrs.PageNumber);
 
+            var saleitemsDTO = _mapper.Map<List<SaleItemDTOs>>(saleItems);
 
-           
+            return new PaginatedList<SaleItemDTOs>(saleitemsDTO, saleItems.TotalCount, saleItems.CurrentPage,saleItems.PageSize);
         }
 
         public SaleItemDTOs CreateSaleItem(SaleItemForCreateDTOs saleItemForCreate)

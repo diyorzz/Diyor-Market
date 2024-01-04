@@ -1,5 +1,4 @@
-﻿
-namespace DiyorMarket.Domain.Pagination
+﻿namespace DiyorMarket.Domain.Pagination
 {
     public class PaginatedList<T>:List<T> where T : class
     { 

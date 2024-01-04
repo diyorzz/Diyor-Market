@@ -1,9 +1,13 @@
 ﻿using AutoMapper;
 using DiyorMarket.Domain.DTOs.Sale;
+using DiyorMarket.Domain.DTOs.SaleItam;
 using DiyorMarket.Domain.Enterfaces.Services;
 using DiyorMarket.Domain.Entities;
 using DiyorMarket.Domain.Exceptions;
+using DiyorMarket.Domain.Pagination;
+using DiyorMarket.Domain.ResourceParameters;
 using DiyorMarket.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace DiyorMarket.Services
 {
@@ -50,11 +54,24 @@ namespace DiyorMarket.Services
             return _mapper.Map<SaleDTOs>(sale);
         }
 
-        public IEnumerable<SaleDTOs> Getsales()
+        public PaginatedList<SaleDTOs> Getsales(SaleResourseParametrs parametrs)
         {
-            var sales=_context.Sales.ToList();
+            var query = _context.Sales.AsQueryable();
 
-            return _mapper.Map<IEnumerable<SaleDTOs>>(sales);
+            if (!string.IsNullOrEmpty(parametrs.OrderBy))
+            {
+                query = parametrs.OrderBy.ToLowerInvariant() switch
+                {
+                    "customerId" => query.OrderBy(x => x.CustomerId),
+                    "customerIddesc" => query.OrderByDescending(x => x.CustomerId),
+                    _ => query.OrderBy(x => x.Id),
+                };
+            }
+            var saleItems = query.ToPaginatedList(parametrs.Pagesize, parametrs.PageNumber);
+
+            var saleDTO = _mapper.Map<List<SaleDTOs>>(saleItems);
+
+            return new PaginatedList<SaleDTOs>(saleDTO, saleItems.TotalCount, saleItems.CurrentPage, saleItems.PageSize);
         }
 
         public void UpdateSale(SaleForUpdateDTOs saleForUpdate)

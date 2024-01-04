@@ -1,7 +1,10 @@
 using DiyorMarket.Extensions;
 using DiyorMarket.Middlewares;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using System.Text;
 
 namespace DiyorMarket
 {
@@ -24,6 +27,16 @@ namespace DiyorMarket
             builder.Services.ConfigureRipositories();
             builder.Services.ConfigureDatabaseContext();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            builder.Services.AddAuthentication("Bearer")
+                .AddJwtBearer(options => options.TokenValidationParameters = new()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "MarketUz-api",
+                    ValidAudience = "MarketUz",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("login marketuzbbbbbbbbb"))
+                });
 
             var app = builder.Build();
 
@@ -43,6 +56,8 @@ namespace DiyorMarket
             app.UseMiddleware<ErrorHendlerMiddlewares>();
 
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
