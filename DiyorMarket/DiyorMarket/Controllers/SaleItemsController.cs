@@ -25,7 +25,7 @@ namespace DiyorMarket.Controllers
         public ActionResult<IEnumerable<SaleItemDTOs>> Get([FromQuery]
         SaleItemResorseParametrs parametrs)
         {
-            var saleitems=_saleItemService.GetSaleItems(parametrs);
+            var saleitems = _saleItemService.GetSaleItems(parametrs);
 
             var metaData = GetPaginationMetaData(saleitems);
 
@@ -36,7 +36,7 @@ namespace DiyorMarket.Controllers
         [HttpGet("{id}")]
         public ActionResult<SaleItemDTOs> Get(int id)
         {
-           var saleitem=_saleItemService.GetSaleItemById(id);
+            var saleitem = _saleItemService.GetSaleItemById(id);
             return Ok(saleitem);
         }
 

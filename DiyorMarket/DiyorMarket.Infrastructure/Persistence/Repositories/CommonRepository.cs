@@ -80,7 +80,7 @@ namespace DiyorMarket.Infrastructure.Persistence.Repositories
         {
             get
             {
-                _saleItem ??=new SaleItemRepository(_context);
+                _saleItem ??= new SaleItemRepository(_context);
                 return _supplyItem;
             }
         }
@@ -92,17 +92,12 @@ namespace DiyorMarket.Infrastructure.Persistence.Repositories
             _product = new ProductRepository(context);
             _customer = new CustomerRepository(context);
             _sale = new SaleRepository(context);
-            _saleItem= new SaleItemRepository(context);
+            _saleItem = new SaleItemRepository(context);
             _supplier = new SupplierRepository(context);
             _supply = new SupplyRepository(context);
             _supplyItem = new SupplyItemRepository(context);
         }
 
-        public Task<int> SaveChangesAsync()
-        {
-            return _context.SaveChangesAsync();
-        }
-
-        public int SaveChanges() => _context.SaveChanges();
+        public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
     }
 }

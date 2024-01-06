@@ -12,7 +12,7 @@ namespace DiyorMarket.Controllers
 {
     [Route("api/categories")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
