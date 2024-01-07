@@ -1,11 +1,9 @@
-﻿using DiyorMarket.Domain.DTOs.SaleItam;
-
-namespace DiyorMarket.Domain.DTOs.Sale
+﻿namespace DiyorMarket.Domain.DTOs.Sale
 {
-    public record SaleDTOs(
-        int Id,
-        DateTime SaleDate,
-        int CustomerId,
-        ICollection<SaleItemDTOs> SaleItems
-        );
+    public class SaleDTOs
+    {
+        public int Id { get; set; }
+        public DateTime SaleDate { get; set; }
+        public int CustomerId { get; set; }
+    }
 }

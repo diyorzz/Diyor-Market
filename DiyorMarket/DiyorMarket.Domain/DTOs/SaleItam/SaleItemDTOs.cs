@@ -1,11 +1,11 @@
-﻿
-namespace DiyorMarket.Domain.DTOs.SaleItam
+﻿namespace DiyorMarket.Domain.DTOs.SaleItam
 {
-    public record SaleItemDTOs(
-        int Id,
-        int Quantity,
-        decimal UnitPrice,
-        int ProductId,
-        int SaleId
-        );
+    public class SaleItemDTos
+    {
+        public int Id { get; set; }
+        public int Quantity { get; set; }
+        public decimal UnitPrice { get; set; }
+        public int ProductId { get; set; }
+        public int SaleId { get; set; }
+    }
 }

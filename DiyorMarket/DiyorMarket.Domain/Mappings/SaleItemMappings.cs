@@ -8,8 +8,8 @@ namespace DiyorMarket.Domain.Mappings
     {
         public SaleItemMappings()
         {
-            CreateMap<SaleItemDTOs, SaleItem>();
-            CreateMap<SaleItem, SaleItemDTOs>();
+            CreateMap<SaleItemDTos, SaleItem>();
+            CreateMap<SaleItem, SaleItemDTos>();
             CreateMap<SaleItemForCreateDTOs, SaleItem>();
             CreateMap<SaleItemForUpdateDTOs, SaleItem>();
         }

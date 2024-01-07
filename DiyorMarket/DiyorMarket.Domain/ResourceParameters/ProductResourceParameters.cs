@@ -9,7 +9,7 @@ namespace DiyorMarket.Domain.ResourceParameters
         public decimal? Price { get; set; } 
         public decimal? PriceLessThan {  get; set; }
         public decimal? PriceGraterThan { get; set; }
-        public string OrderBy { get; set; } = "name";
+        public string OrderBy { get; set; } = "id";
 
 
         public int PageNumber { get; set; } = 1;

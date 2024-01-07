@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
 using DiyorMarket.Domain.DTOs.Customer;
-using DiyorMarket.Domain.DTOs.Product;
 using DiyorMarket.Domain.Enterfaces.Services;
 using DiyorMarket.Domain.Entities;
 using DiyorMarket.Domain.Exceptions;
 using DiyorMarket.Domain.Pagination;
 using DiyorMarket.Domain.ResourceParameters;
 using DiyorMarket.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
 
 namespace DiyorMarket.Services
 {
@@ -20,11 +18,11 @@ namespace DiyorMarket.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public PaginatedList<CustomerDtOs> GetCustomers(CustomerResourceParameters parameters)
+        public PaginatedList<CustomerDTOs> GetCustomers(CustomerResourceParameters parameters)
         {
             var query = _context.Customers.AsQueryable();
 
-            if(!string.IsNullOrWhiteSpace(parameters.SearchString))
+            if (!string.IsNullOrWhiteSpace(parameters.SearchString))
             {
                 query = query.Where(x => x.FirstName.Contains(parameters.SearchString)
                     || x.LastName.Contains(parameters.SearchString));
@@ -42,42 +40,42 @@ namespace DiyorMarket.Services
             }
             var customer = query.ToPaginatedList(parameters.Pagesize, parameters.PageNumber);
 
-            var customerDTO = _mapper.Map<List<CustomerDtOs>>(customer);
+            var customerDTO = _mapper.Map<List<CustomerDTOs>>(customer);
 
-            return new PaginatedList<CustomerDtOs>(customerDTO, customer.TotalCount, customer.CurrentPage, customer.PageSize);
+            return new PaginatedList<CustomerDTOs>(customerDTO, customer.TotalCount, customer.CurrentPage, customer.PageSize);
         }
 
-        public CustomerDtOs CreateCustomer(CustomerForCereateDTOs customerForCereate)
+        public CustomerDTOs CreateCustomer(CustomerForCereateDTOs customerForCereate)
         {
             var customer = _mapper.Map<Customer>(customerForCereate);
 
             _context.Customers.Add(customer);
             _context.SaveChanges();
 
-            return _mapper.Map<CustomerDtOs>(customer);
+            return _mapper.Map<CustomerDTOs>(customer);
         }
 
         public void DeleteCustomer(int id)
         {
-            var customer=_context.Customers.FirstOrDefault(c => c.Id == id);
+            var customer = _context.Customers.FirstOrDefault(c => c.Id == id);
 
-            if(customer != null)
+            if (customer != null)
             {
                 _context.Customers.Remove(customer);
                 _context.SaveChanges();
             }
         }
 
-        public CustomerDtOs? GetCustomerById(int id)
+        public CustomerDTOs? GetCustomerById(int id)
         {
-            var customers=_context.Customers.FirstOrDefault(c => c.Id == id);
+            var customers = _context.Customers.FirstOrDefault(c => c.Id == id);
 
-            if(customers == null)
+            if (customers == null)
             {
                 throw new EntityNotFoundException($"Customer with id: {id} not found");
             }
 
-            return _mapper.Map<CustomerDtOs>(customers);
+            return _mapper.Map<CustomerDTOs>(customers);
         }
 
         public void UpdateCustomer(CustomerForUpdateDTOs customerForUpdate)

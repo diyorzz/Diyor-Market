@@ -1,12 +1,9 @@
-﻿using DiyorMarket.Domain.DTOs.Supply;
-
-namespace DiyorMarket.Domain.DTOs.Supplier
+﻿namespace DiyorMarket.Domain.DTOs.Supplier
 {
-    public record SupplierDTOs(
-        int Id,
-        string Name,
-        string PhoneNumber,
-        string Company,
-        ICollection<SupplyDTOs> Supplies
-        );
+    public class SupplierDTOs
+    {
+        public int Id { get; set; }
+        public string FullName { get; set; }
+        public string Phone { get; set; }
+    }
 }

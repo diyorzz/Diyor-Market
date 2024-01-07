@@ -11,7 +11,7 @@ namespace DiyorMarket.Domain.DTOs.Product
         public decimal Price { get; set; }
         public DateTime ExpireDate { get; set; }
         public int CategoryId { get; set; }
-        public ICollection<SaleItemDTOs> SaleItems { get; set; } = new List<SaleItemDTOs>();
+        public ICollection<SaleItemDTos> SaleItems { get; set; } = new List<SaleItemDTos>();
         public ICollection<SupplyItemDTOs> SupplyItems { get; set; } = new List<SupplyItemDTOs>();
     }
         

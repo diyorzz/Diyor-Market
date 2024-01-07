@@ -5,7 +5,7 @@ namespace DiyorMarket.Domain.ResourceParameters
     {
         private const int MaxPageSize = 20;
         public string? SearchString { get; set; }
-        public string OrderBy { get; set; } = "name";
+        public string OrderBy { get; set; } = "id";
         public int PageNumber { get; set; } = 1;
 
         private int _pageSize = 15;

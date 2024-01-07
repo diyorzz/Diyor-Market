@@ -8,8 +8,8 @@ namespace DiyorMarket.Domain.Mappings
     {
         public CustomerMappings()
         {
-            CreateMap<Customer, CustomerDtOs>();
-            CreateMap<CustomerDtOs, Customer>();
+            CreateMap<Customer, CustomerDTOs>();
+            CreateMap<Customer, Customer>();
             CreateMap<CustomerForCereateDTOs, Customer>();
             CreateMap<Customer,CustomerForCereateDTOs>();
             CreateMap<CustomerForUpdateDTOs, Customer>();

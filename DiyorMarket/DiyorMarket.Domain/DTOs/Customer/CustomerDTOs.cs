@@ -2,11 +2,11 @@
 
 namespace DiyorMarket.Domain.DTOs.Customer
 {
-    public record CustomerDtOs(
-        int Id,
-        string FirstName,
-        string LastName,
-        string PhoneNumber,
-        ICollection<SaleDTOs> Sales
-        );
+    public class CustomerDTOs
+    {
+        public int Id { get; set; }
+        public string FullName { get; set; }
+        public string Phone { get; set; }
+        public virtual ICollection<SaleDTOs> Sales { get; set; }
+    }
 }

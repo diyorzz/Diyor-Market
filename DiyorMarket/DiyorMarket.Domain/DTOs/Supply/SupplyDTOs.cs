@@ -2,10 +2,11 @@
 
 namespace DiyorMarket.Domain.DTOs.Supply
 {
-    public record SupplyDTOs(
-         int Id,
-         DateTime SupplyDate,
-         int SupplierId,
-         ICollection<SupplyItemDTOs> Supplies
-         );
+    public class SupplyDTOs
+    {
+        public int Id { get; set; }
+        public DateTime SupplyDate { get; set; }
+        public int SupplierId { get; set; }
+        public virtual ICollection<SupplyItemDTOs> SupplItems { get; set; }
+    }
 }

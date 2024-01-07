@@ -12,15 +12,15 @@ namespace DiyorMarket.Extensions
     {
         public static IServiceCollection ConfigureRipositories(this IServiceCollection services)
         {
-            services.AddScoped<ICommonRepository,CommonRepository>();
+            services.AddScoped<ICommonRepository, CommonRepository>();
             services.AddScoped<ICategoryService, CategoriesService>();
             services.AddScoped<ICustomerService, CustomersService>();
             services.AddScoped<IProductService, ProductsService>();
             services.AddScoped<ISaleService, SalesService>();
-            services.AddScoped<ISaleItemService,SaleItemsService>();
+            services.AddScoped<ISaleItemService, SaleItemsService>();
             services.AddScoped<ISupplierService, SuppliersService>();
             services.AddScoped<ISupplyService, SuppliesService>();
-            services.AddScoped<ISuppyItemService,SupplyItemsService>();
+            services.AddScoped<ISuppyItemService, SupplyItemsService>();
 
             return services;
         }
