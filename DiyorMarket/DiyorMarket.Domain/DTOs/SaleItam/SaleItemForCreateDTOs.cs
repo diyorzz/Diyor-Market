@@ -1,5 +1,4 @@
-﻿
-namespace DiyorMarket.Domain.DTOs.SaleItam
+﻿namespace DiyorMarket.Domain.DTOs.SaleItam
 {
     public record SaleItemForCreateDTOs(
          int Quantity,

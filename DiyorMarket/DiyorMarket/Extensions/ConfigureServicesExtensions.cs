@@ -13,6 +13,7 @@ namespace DiyorMarket.Extensions
         public static IServiceCollection ConfigureRipositories(this IServiceCollection services)
         {
             services.AddScoped<ICommonRepository, CommonRepository>();
+
             services.AddScoped<ICategoryService, CategoriesService>();
             services.AddScoped<ICustomerService, CustomersService>();
             services.AddScoped<IProductService, ProductsService>();

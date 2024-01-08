@@ -1,6 +1,6 @@
 ﻿namespace DiyorMarket.Domain.DTOs.SaleItam
 {
-    public class SaleItemDTos
+    public class SaleItemDTOs
     {
         public int Id { get; set; }
         public int Quantity { get; set; }

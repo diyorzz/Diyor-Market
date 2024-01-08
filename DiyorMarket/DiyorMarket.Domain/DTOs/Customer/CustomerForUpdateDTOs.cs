@@ -1,5 +1,4 @@
-﻿
-namespace DiyorMarket.Domain.DTOs.Customer
+﻿namespace DiyorMarket.Domain.DTOs.Customer
 {
     public record CustomerForUpdateDTOs(
         int Id,

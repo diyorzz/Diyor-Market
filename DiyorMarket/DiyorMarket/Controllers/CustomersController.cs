@@ -21,7 +21,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<CustomerDtOs>> Get([FromQuery]CustomerResourceParameters parameters)
+        public ActionResult<IEnumerable<CustomerDTOs>> Get([FromQuery]CustomerResourceParameters parameters)
         {
             var customers = _customerService.GetCustomers(parameters);
 
@@ -32,14 +32,14 @@ namespace DiyorMarket.Controllers
             return Ok(customers);
         }
         [HttpGet("{id}")]
-        public ActionResult<CustomerDtOs> Get(int id)
+        public ActionResult<CustomerDTOs> Get(int id)
         {
             var customer = _customerService.GetCustomerById(id);
 
             return Ok(customer);
         }
         [HttpPost]
-        public ActionResult<CustomerDtOs> Post([FromBody] CustomerForCereateDTOs customer)
+        public ActionResult<CustomerDTOs> Post([FromBody] CustomerForCereateDTOs customer)
         {
              _customerService.CreateCustomer(customer);
 
@@ -67,7 +67,7 @@ namespace DiyorMarket.Controllers
 
             return NoContent();
         }
-        private PagenationMetaData GetPaginationMetaData(PaginatedList<CustomerDtOs> customerDtOs)
+        private PagenationMetaData GetPaginationMetaData(PaginatedList<CustomerDTOs> customerDtOs)
         {
             return new PagenationMetaData
             {

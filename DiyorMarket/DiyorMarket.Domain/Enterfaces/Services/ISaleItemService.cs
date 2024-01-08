@@ -6,9 +6,9 @@ namespace DiyorMarket.Domain.Enterfaces.Services
 {
     public interface  ISaleItemService
     {
-        PaginatedList<SaleItemDTos> GetSaleItems(SaleItemResorseParametrs parametrs);
-        SaleItemDTos? GetSaleItemById(int id);
-        SaleItemDTos CreateSaleItem(SaleItemForCreateDTOs saleItemForCreate);
+        PaginatedList<SaleItemDTOs> GetSaleItems(SaleItemResorseParametrs parametrs);
+        SaleItemDTOs? GetSaleItemById(int id);
+        SaleItemDTOs CreateSaleItem(SaleItemForCreateDTOs saleItemForCreate);
         void UpdateSaleItem(SaleItemForUpdateDTOs saleItemForUpdate);
         void DeleteSaleItem(int id);
     }

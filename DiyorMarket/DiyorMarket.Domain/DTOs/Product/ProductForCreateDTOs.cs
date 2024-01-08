@@ -1,5 +1,4 @@
-﻿
-namespace DiyorMarket.Domain.DTOs.Product
+﻿namespace DiyorMarket.Domain.DTOs.Product
 {
     public record ProductForCreateDTOs(
        string Name,

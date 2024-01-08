@@ -1,5 +1,4 @@
-﻿
-namespace DiyorMarket.Domain.DTOs.Supply
+﻿namespace DiyorMarket.Domain.DTOs.Supply
 {
     public record SupplyForUpdateDTOs(
         int Id,
