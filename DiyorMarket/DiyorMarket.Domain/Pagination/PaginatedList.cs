@@ -8,15 +8,14 @@
         public int TotalCount { get; set; }
         public bool HasPrevious => CurrentPage > 1;
         public bool HasNext => CurrentPage < TotalPages;
-
-        public PaginatedList(List<T> items, int count, int pageNumber, int pageSize)
+        public PaginatedList(List<T> list, int count, int pageNumber, int pageSize)
         {
             TotalCount = count;
             PageSize = pageSize;
             CurrentPage = pageNumber;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
 
-            AddRange(items);
+            AddRange(list);
         }
     }
 }

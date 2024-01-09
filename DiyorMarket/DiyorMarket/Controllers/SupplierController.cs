@@ -23,7 +23,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<SaleDTOs>> Get([FromQuery]SupplierResourseParamentrs paramentrs)
+        public ActionResult<IEnumerable<SupplierDTOs>> Get([FromQuery]SupplierResourseParamentrs paramentrs)
         {
             var supplier=_supplierService.GetSupplier(paramentrs);
 

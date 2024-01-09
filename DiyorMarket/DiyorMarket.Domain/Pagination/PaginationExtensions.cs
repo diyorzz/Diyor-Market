@@ -4,10 +4,7 @@ namespace DiyorMarket.Domain.Pagination
 {
     public static class PaginationExtensions
     {
-        public static PaginatedList<T> ToPaginatedList<T>(
-            this IQueryable<T> source,
-            int pageSize,
-            int pageNumber) where T : EntityBase
+        public static PaginatedList<T> ToPaginatedList<T>(this IQueryable<T> source, int pageSize, int pageNumber) where T : EntityBase
         {
             var count = source.Count();
             var items = source.Skip((pageNumber - 1) * pageSize)
