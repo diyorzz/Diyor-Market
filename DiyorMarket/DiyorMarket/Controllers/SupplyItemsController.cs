@@ -1,7 +1,10 @@
 ﻿using DiyorMarket.Domain.DTOs.Supply;
 using DiyorMarket.Domain.DTOs.SupplyItem;
 using DiyorMarket.Domain.Enterfaces.Services;
+using DiyorMarket.Domain.Pagination;
+using DiyorMarket.Domain.ResourceParameters;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,18 +15,23 @@ namespace DiyorMarket.Controllers
     public class SupplyItemsController : ControllerBase
     {
         private readonly ISuppyItemService _suppyItemService;
-        
+
         public SupplyItemsController(ISuppyItemService suppyItemService)
         {
             _suppyItemService = suppyItemService;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<SupplyItemDTOs>> Get()
+        public ActionResult<IEnumerable<SupplyItemDTOs>> Get([FromQuery]
+        SupplyItemResourceParamentrs paramentrs)
         {
-            var supplyItems = _suppyItemService.GetSupplyItems();
+            var supplyitems = _suppyItemService.GetSupplyItems(paramentrs);
 
-            return Ok(supplyItems);
+            var metaData = GetPaginationMetaData(supplyitems);
+
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metaData));
+
+            return Ok(supplyitems);
         }
 
         [HttpGet("{id}")]
@@ -53,6 +61,16 @@ namespace DiyorMarket.Controllers
         {
             _suppyItemService.DeleteSupplyItem(id);
             return NoContent();
+        }
+        private PagenationMetaData GetPaginationMetaData(PaginatedList<SupplyItemDTOs> suppliersDTO)
+        {
+            return new PagenationMetaData
+            {
+                Totalcount = suppliersDTO.TotalCount,
+                PageSize = suppliersDTO.PageSize,
+                CurrentPage = suppliersDTO.CurrentPage,
+                TotalPages = suppliersDTO.TotalPages,
+            };
         }
     }
 }

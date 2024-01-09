@@ -8,7 +8,6 @@ namespace DiyorMarket.Domain.Entities
 
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
-
         public virtual ICollection<SaleItem> SaleItems { get; set; }
     }
 }

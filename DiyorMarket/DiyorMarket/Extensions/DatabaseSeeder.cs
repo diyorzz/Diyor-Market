@@ -189,7 +189,7 @@ namespace DiyorMarket.Extensions
         }
         private static void CreateSupplies(DiyorMarketDbContext context)
         {
-            if (context.Supllies.Any()) return;
+            if (context.Supplies.Any()) return;
 
             var suppliers = context.Suppliers.ToList();
             List<Supply> supplies = new List<Supply>();
@@ -207,14 +207,14 @@ namespace DiyorMarket.Extensions
                 }
             }
 
-            context.Supllies.AddRange(supplies);
+            context.Supplies.AddRange(supplies);
             context.SaveChanges();
         }
         private static void CreateSupplyItems(DiyorMarketDbContext context)
         {
-            if (context.SupliesItems.Any()) return;
+            if (context.SupplyItems.Any()) return;
 
-            var supplyitems = context.Supllies.ToList();
+            var supplyitems = context.Supplies.ToList();
             var products = context.Products.ToList();
 
             List<SupplyItem> supplyItems = new List<SupplyItem>();
@@ -238,7 +238,7 @@ namespace DiyorMarket.Extensions
                     });
                 }
             }
-            context.SupliesItems.AddRange(supplyItems);
+            context.SupplyItems.AddRange(supplyItems);
             context.SaveChanges();
         }
     }

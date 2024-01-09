@@ -1,10 +1,10 @@
 ﻿namespace DiyorMarket.Domain.ResourceParameters
 {
-    public class SaleItemResorseParametrs
+    public class SupplyItemResourceParamentrs
     {
         private const int MaxPageSize = 15;
         public int? ProductId { get; set; }
-        public int? SaleId { get; set; }
+        public int? SupplyId { get; set; }
         public int? QuantityLessThan { get; set; }
         public int? QuantityGreaterThan { get; set; }
         public decimal? UnitPrice { get; set; }
