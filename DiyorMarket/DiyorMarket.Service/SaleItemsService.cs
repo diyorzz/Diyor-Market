@@ -26,17 +26,17 @@ namespace DiyorMarket.Services
             {
                 query = query.Where(x => x.ProductId == parametrs.ProductId);
             }
-            if(parametrs.SaleId is not null)
+            if (parametrs.SaleId is not null)
             {
                 query = query.Where(x => x.SaleId == parametrs.SaleId);
             }
-            if(parametrs.QuantityLessThan is not null)
+            if (parametrs.QuantityLessThan is not null)
             {
                 query = query.Where(x => x.UnitPrice < parametrs.QuantityLessThan);
             }
-            if(parametrs.QuantityGreaterThan is not null)
+            if (parametrs.QuantityGreaterThan is not null)
             {
-                query=query.Where(x=>x.UnitPrice > parametrs.QuantityGreaterThan);
+                query = query.Where(x => x.UnitPrice > parametrs.QuantityGreaterThan);
             }
             if (!string.IsNullOrEmpty(parametrs.OrderBy))
             {
@@ -55,29 +55,8 @@ namespace DiyorMarket.Services
 
             var saleitemsDTO = _mapper.Map<List<SaleItemDTOs>>(saleItems);
 
-            return new PaginatedList<SaleItemDTOs>(saleitemsDTO, saleItems.TotalCount, saleItems.CurrentPage,saleItems.PageSize);
+            return new PaginatedList<SaleItemDTOs>(saleitemsDTO, saleItems.TotalCount, saleItems.CurrentPage, saleItems.PageSize);
         }
-
-        public SaleItemDTOs CreateSaleItem(SaleItemForCreateDTOs saleItemForCreate)
-        {
-            var saleItem = _mapper.Map<SaleItem>(saleItemForCreate);
-            _context.SalesItems.Add(saleItem);
-            _context.SaveChanges();
-
-            return _mapper.Map<SaleItemDTOs>(saleItem);
-        }
-
-        public void DeleteSaleItem(int id)
-        {
-            var saleItem = _context.SalesItems.FirstOrDefault(s => s.Id == id);
-
-            if (saleItem is not null)
-            {
-                _context.SalesItems.Remove(saleItem);
-                _context.SaveChanges();
-            }
-        }
-
         public SaleItemDTOs? GetSaleItemById(int id)
         {
             var saleItem = _context.SalesItems.FirstOrDefault(sale => sale.Id == id);
@@ -87,14 +66,31 @@ namespace DiyorMarket.Services
                 throw new EntityNotFoundException($"SaleItem with id: {id} not found");
             }
 
-            return _mapper.Map<SaleItemDTOs?>(saleItem);  
+            return _mapper.Map<SaleItemDTOs?>(saleItem);
         }
+        public SaleItemDTOs CreateSaleItem(SaleItemForCreateDTOs saleItemForCreate)
+        {
+            var saleItem = _mapper.Map<SaleItem>(saleItemForCreate);
+            _context.SalesItems.Add(saleItem);
+            _context.SaveChanges();
 
+            return _mapper.Map<SaleItemDTOs>(saleItem);
+        }
         public void UpdateSaleItem(SaleItemForUpdateDTOs saleItemForUpdate)
         {
             var saleItem = _mapper.Map<SaleItem>(saleItemForUpdate);
             _context.SalesItems.Update(saleItem);
             _context.SaveChanges();
+        }
+        public void DeleteSaleItem(int id)
+        {
+            var saleItem = _context.SalesItems.FirstOrDefault(s => s.Id == id);
+
+            if (saleItem is not null)
+            {
+                _context.SalesItems.Remove(saleItem);
+                _context.SaveChanges();
+            }
         }
     }
 }

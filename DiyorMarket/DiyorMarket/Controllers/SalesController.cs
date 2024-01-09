@@ -21,7 +21,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<SaleDTOs>> Get(SaleResourseParametrs parametrs)
+        public ActionResult<IEnumerable<SaleDTOs>> Get([FromQuery] SaleResourseParametrs parametrs)
         {
             var sales = _saleService.Getsales(parametrs);
 

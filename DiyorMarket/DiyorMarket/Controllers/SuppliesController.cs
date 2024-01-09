@@ -40,7 +40,6 @@ namespace DiyorMarket.Controllers
             return StatusCode(201);
         }
 
-        // PUT api/<SuppliesController>/5
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] SupplyForUpdateDTOs supply)
         {
@@ -48,7 +47,6 @@ namespace DiyorMarket.Controllers
             return NoContent();
         }
 
-        // DELETE api/<SuppliesController>/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {

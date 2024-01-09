@@ -44,28 +44,6 @@ namespace DiyorMarket.Services
 
             return new PaginatedList<CustomerDTOs>(customerDTO, customer.TotalCount, customer.CurrentPage, customer.PageSize);
         }
-
-        public CustomerDTOs CreateCustomer(CustomerForCereateDTOs customerForCereate)
-        {
-            var customer = _mapper.Map<Customer>(customerForCereate);
-
-            _context.Customers.Add(customer);
-            _context.SaveChanges();
-
-            return _mapper.Map<CustomerDTOs>(customer);
-        }
-
-        public void DeleteCustomer(int id)
-        {
-            var customer = _context.Customers.FirstOrDefault(c => c.Id == id);
-
-            if (customer != null)
-            {
-                _context.Customers.Remove(customer);
-                _context.SaveChanges();
-            }
-        }
-
         public CustomerDTOs? GetCustomerById(int id)
         {
             var customers = _context.Customers.FirstOrDefault(c => c.Id == id);
@@ -77,13 +55,31 @@ namespace DiyorMarket.Services
 
             return _mapper.Map<CustomerDTOs>(customers);
         }
+        public CustomerDTOs CreateCustomer(CustomerForCereateDTOs customerForCereate)
+        {
+            var customer = _mapper.Map<Customer>(customerForCereate);
 
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
+
+            return _mapper.Map<CustomerDTOs>(customer);
+        }
         public void UpdateCustomer(CustomerForUpdateDTOs customerForUpdate)
         {
             var customer = _mapper.Map<Customer>(customerForUpdate);
 
             _context.Customers.Update(customer);
             _context.SaveChanges();
+        }
+        public void DeleteCustomer(int id)
+        {
+            var customer = _context.Customers.FirstOrDefault(c => c.Id == id);
+
+            if (customer != null)
+            {
+                _context.Customers.Remove(customer);
+                _context.SaveChanges();
+            }
         }
     }
 }

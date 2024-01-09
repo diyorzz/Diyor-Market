@@ -19,36 +19,6 @@ namespace DiyorMarket.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public ProductDto CreateProduct(ProductForCreateDTOs productForCreate)
-        {
-            var product = _mapper.Map<Product>(productForCreate);
-
-            _context.Products.Add(product);
-            _context.SaveChanges();
-
-            return _mapper.Map<ProductDto>(product);
-        }
-        public void DeleteProduct(int id)
-        {
-            var product = _context.Products.FirstOrDefault(p => p.Id == id);
-
-            if (product is not null)
-            {
-                _context.Products.Remove(product);
-                _context.SaveChanges();
-            }
-        }
-        public ProductDto? GetProductById(int id)
-        {
-            var product = _context.Products.FirstOrDefault(p => p.Id == id);
-
-            if (product is null)
-            {
-                throw new EntityNotFoundException($"Product with id: {id} not found");
-            }
-
-            return _mapper.Map<ProductDto?>(product);
-        }
         public PaginatedList<ProductDto> GetProducts(ProductResourceParameters parameters)
         {
             var query = _context.Products.AsQueryable();
@@ -101,12 +71,42 @@ namespace DiyorMarket.Services
 
             return new PaginatedList<ProductDto>(productDTO, products.TotalCount, products.CurrentPage, products.PageSize);
         }
+        public ProductDto? GetProductById(int id)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+
+            if (product is null)
+            {
+                throw new EntityNotFoundException($"Product with id: {id} not found");
+            }
+
+            return _mapper.Map<ProductDto?>(product);
+        }
+        public ProductDto CreateProduct(ProductForCreateDTOs productForCreate)
+        {
+            var product = _mapper.Map<Product>(productForCreate);
+
+            _context.Products.Add(product);
+            _context.SaveChanges();
+
+            return _mapper.Map<ProductDto>(product);
+        }
         public void UpdateProduct(ProductForUpdateDTOs productForUpdate)
         {
             var product = _mapper.Map<Product>(productForUpdate);
 
             _context.Products.Update(product);
             _context.SaveChanges();
+        }
+        public void DeleteProduct(int id)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+
+            if (product is not null)
+            {
+                _context.Products.Remove(product);
+                _context.SaveChanges();
+            }
         }
     }
 }

@@ -13,6 +13,11 @@ namespace DiyorMarket.Services
     {
         private readonly IMapper _mapper;
         private readonly DiyorMarketDbContext _context;
+        public CategoriesService(IMapper mapper, DiyorMarketDbContext context)
+        {
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+        }
         public PaginatedList<CategoryDTOs> GetCategories(CategoryResourseParametrs parameters)
         {
             var query = _context.Categories.AsQueryable();
@@ -36,33 +41,6 @@ namespace DiyorMarket.Services
 
             return new PaginatedList<CategoryDTOs>(categryDTO, category.TotalCount, category.CurrentPage, category.PageSize);
         }
-
-        public CategoriesService(IMapper mapper, DiyorMarketDbContext context)
-        {
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _context = context ?? throw new ArgumentNullException(nameof(context));
-        }
-
-        public CategoryDTOs CreateCategory(CategoryForCreateDto category)
-        {
-            var categoryEntity=_mapper.Map<Category>(category);
-
-            _context.Categories.Add(categoryEntity);
-            _context.SaveChanges();
-
-             return _mapper.Map<CategoryDTOs>(categoryEntity);
-        }
-
-        public void DeleteCategory(int id)
-        {
-            var category = _context.Categories.FirstOrDefault(x => x.Id == id);
-            if(category != null)
-            {
-                _context.Categories.Remove(category);
-                _context.SaveChanges();
-            }
-        }
-
         public CategoryDTOs? GetCategoryById(int id)
         {
             var category = _context.Categories.FirstOrDefault(x => x.Id == id);
@@ -72,9 +50,17 @@ namespace DiyorMarket.Services
                 throw new EntityNotFoundException($"Category with id: {id} not found");
             }
 
-            return _mapper.Map<CategoryDTOs>(category);      
+            return _mapper.Map<CategoryDTOs>(category);
         }
+        public CategoryDTOs CreateCategory(CategoryForCreateDto category)
+        {
+            var categoryEntity=_mapper.Map<Category>(category);
 
+            _context.Categories.Add(categoryEntity);
+            _context.SaveChanges();
+
+             return _mapper.Map<CategoryDTOs>(categoryEntity);
+        }
         public void UpdateCategory(CategoryForUpdateDto category)
         {
             var categoryEntity = _mapper.Map<Category>(category);
@@ -82,6 +68,14 @@ namespace DiyorMarket.Services
             _context.Categories.Update(categoryEntity);
             _context.SaveChanges();
         }
-
+        public void DeleteCategory(int id)
+        {
+            var category = _context.Categories.FirstOrDefault(x => x.Id == id);
+            if (category != null)
+            {
+                _context.Categories.Remove(category);
+                _context.SaveChanges();
+            }
+        }
     }
 }

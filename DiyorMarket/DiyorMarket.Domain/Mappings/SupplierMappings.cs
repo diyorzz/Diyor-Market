@@ -13,8 +13,9 @@ namespace DiyorMarket.Domain.Mappings
     {
         public SupplierMappings()
         {
+            CreateMap<Supplier, SupplierDTOs>()
+                .ForMember(x => x.FullName, r => r.MapFrom(x => x.FirstName + "" + x.LastName));
             CreateMap<SupplierDTOs, Supplier>();
-            CreateMap<Supplier, SupplierDTOs>();
             CreateMap<SupplierForCreateDTOs, Supplier>();
             CreateMap<SupplierForUpdateDTOs, Supplier>();
         }
