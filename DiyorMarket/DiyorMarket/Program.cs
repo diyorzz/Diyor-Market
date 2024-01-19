@@ -1,7 +1,6 @@
 using DiyorMarket.Extensions;
 using DiyorMarket.Middlewares;
 using Microsoft.AspNetCore.StaticFiles;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System.Text;

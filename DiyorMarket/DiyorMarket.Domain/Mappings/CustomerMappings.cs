@@ -15,6 +15,5 @@ namespace DiyorMarket.Domain.Mappings
             CreateMap<Customer,CustomerForCereateDTOs>();
             CreateMap<CustomerForUpdateDTOs, Customer>();
         }
-
     }
 }
