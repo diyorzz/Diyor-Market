@@ -2,7 +2,6 @@
 using DiyorMarket.Domain.Enterfaces.Services;
 using DiyorMarket.Domain.Pagination;
 using DiyorMarket.Domain.ResourceParameters;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 

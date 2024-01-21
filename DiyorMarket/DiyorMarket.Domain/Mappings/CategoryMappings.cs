@@ -9,7 +9,7 @@ namespace DiyorMarket.Domain.Mappings
         public CategoryMappings()
         {
             CreateMap<Category, CategoryDTOs>()
-                .ForMember(x => x.NumberOfProducts, r => r.MapFrom(x => x.Products.Count));
+            .ForMember(x => x.NumberOfProducts, t => t.MapFrom(p => p.Products.Count));
             CreateMap<CategoryDTOs, Category>();
             CreateMap<CategoryForCreateDto, Category>();
             CreateMap<CategoryForUpdateDto, Category>();

@@ -24,6 +24,7 @@ namespace DiyorMarket
             builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
             builder.Services.ConfigureLogger();
             builder.Services.ConfigureRipositories();
+            builder.Services.ConfigureServices();
             builder.Services.ConfigureDatabaseContext();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddAuthentication("Bearer")
@@ -45,7 +46,6 @@ namespace DiyorMarket
                 builder.Services.SeedDatabase(services);
             }
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

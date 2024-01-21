@@ -14,6 +14,10 @@ namespace DiyorMarket.Extensions
         {
             services.AddScoped<ICommonRepository, CommonRepository>();
 
+            return services;
+        }
+        public static IServiceCollection ConfigureServices(this IServiceCollection services)
+        {
             services.AddScoped<ICategoryService, CategoriesService>();
             services.AddScoped<ICustomerService, CustomersService>();
             services.AddScoped<IProductService, ProductsService>();
@@ -39,7 +43,7 @@ namespace DiyorMarket.Extensions
         public static IServiceCollection ConfigureDatabaseContext(this IServiceCollection services)
         {
             services.AddDbContext<DiyorMarketDbContext>(options =>
-                options.UseSqlServer("Data Source=DESKTOP-7DUGPCC;Initial Catalog=DiyorMarket;Integrated Security=True;TrustServerCertificate=True"));
+                options.UseSqlServer("MarketDb"));
 
             return services;
         }

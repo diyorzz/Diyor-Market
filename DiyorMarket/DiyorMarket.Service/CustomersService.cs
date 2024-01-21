@@ -41,7 +41,6 @@ namespace DiyorMarket.Services
             var customer = query.ToPaginatedList(parameters.Pagesize, parameters.PageNumber);
 
             var customerDTO = _mapper.Map<List<CustomerDTOs>>(customer);
-            var customerDTO = _mapper.Map<List<CustomerDTOs>>(customer);
 
             return new PaginatedList<CustomerDTOs>(customerDTO, customer.TotalCount, customer.CurrentPage, customer.PageSize);
         }

@@ -5,17 +5,13 @@ using DiyorMarket.Domain.ResourceParameters;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace DiyorMarket.Controllers
 {
     [Route("api/products")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
-
         private readonly IProductService _productService;
-
         public ProductsController(IProductService productService)
         {
             _productService = productService;
@@ -37,10 +33,9 @@ namespace DiyorMarket.Controllers
         [HttpGet("{id}")]
         public ActionResult<ProductDto> Get(int id)
         {
-            var product =_productService.GetProductById(id);    
+            var product = _productService.GetProductById(id);
             return Ok(product);
         }
-
         [HttpPost]
         public ActionResult<ProductDto> Post([FromBody] ProductForCreateDTOs product)
         {
@@ -60,7 +55,7 @@ namespace DiyorMarket.Controllers
         public ActionResult Delete(int id)
         {
             _productService.DeleteProduct(id);
-            return NoContent(); 
+            return NoContent();
         }
         private PagenationMetaData GetPaginationMetaData(PaginatedList<ProductDto> products)
         {

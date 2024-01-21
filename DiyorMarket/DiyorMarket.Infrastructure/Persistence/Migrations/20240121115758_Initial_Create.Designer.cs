@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiyorMarket.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(DiyorMarketDbContext))]
-    [Migration("20231219063815_Initial_Create")]
+    [Migration("20240121115758_Initial_Create")]
     partial class Initial_Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

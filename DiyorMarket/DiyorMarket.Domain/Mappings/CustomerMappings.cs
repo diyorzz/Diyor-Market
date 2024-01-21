@@ -9,10 +9,10 @@ namespace DiyorMarket.Domain.Mappings
         public CustomerMappings()
         {
             CreateMap<Customer, CustomerDTOs>()
-                .ForMember(x => x.FullName, r => r.MapFrom(x => x.FirstName + "" + x.LastName));
+                    .ForCtorParam("FullName", opt => opt.MapFrom(src => string.Join(" ", src.FirstName, src.LastName)));
             CreateMap<Customer, Customer>();
             CreateMap<CustomerForCereateDTOs, Customer>();
-            CreateMap<Customer,CustomerForCereateDTOs>();
+            CreateMap<Customer, CustomerForCereateDTOs>();
             CreateMap<CustomerForUpdateDTOs, Customer>();
         }
     }
