@@ -18,7 +18,7 @@ namespace DiyorMarket.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public PaginatedList<CustomerDTOs> GetCustomers(CustomerResourceParameters parameters)
+        public PaginatedList<CustomerDTO> GetCustomers(CustomerResourceParameters parameters)
         {
             var query = _context.Customers.AsQueryable();
 
@@ -40,11 +40,11 @@ namespace DiyorMarket.Services
             }
             var customer = query.ToPaginatedList(parameters.Pagesize, parameters.PageNumber);
 
-            var customerDTO = _mapper.Map<List<CustomerDTOs>>(customer);
+            var customerDTO = _mapper.Map<List<CustomerDTO>>(customer);
 
-            return new PaginatedList<CustomerDTOs>(customerDTO, customer.TotalCount, customer.CurrentPage, customer.PageSize);
+            return new PaginatedList<CustomerDTO>(customerDTO, customer.TotalCount, customer.CurrentPage, customer.PageSize);
         }
-        public CustomerDTOs? GetCustomerById(int id)
+        public CustomerDTO? GetCustomerById(int id)
         {
             var customers = _context.Customers.FirstOrDefault(c => c.Id == id);
 
@@ -53,18 +53,18 @@ namespace DiyorMarket.Services
                 throw new EntityNotFoundException($"Customer with id: {id} not found");
             }
 
-            return _mapper.Map<CustomerDTOs>(customers);
+            return _mapper.Map<CustomerDTO>(customers);
         }
-        public CustomerDTOs CreateCustomer(CustomerForCereateDTOs customerForCereate)
+        public CustomerDTO CreateCustomer(CustomerForCereateDTO customerForCereate)
         {
             var customer = _mapper.Map<Customer>(customerForCereate);
 
             _context.Customers.Add(customer);
             _context.SaveChanges();
 
-            return _mapper.Map<CustomerDTOs>(customer);
+            return _mapper.Map<CustomerDTO>(customer);
         }
-        public void UpdateCustomer(CustomerForUpdateDTOs customerForUpdate)
+        public void UpdateCustomer(CustomerForUpdateDTO customerForUpdate)
         {
             var customer = _mapper.Map<Customer>(customerForUpdate);
 

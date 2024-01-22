@@ -18,7 +18,7 @@ namespace DiyorMarket.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public PaginatedList<CategoryDTOs> GetCategories(CategoryResourseParametrs parameters)
+        public PaginatedList<CategoryDTO> GetCategories(CategoryResourseParametrs parameters)
         {
             var query = _context.Categories.AsQueryable();
 
@@ -37,11 +37,11 @@ namespace DiyorMarket.Services
             }
             var category = query.ToPaginatedList(parameters.Pagesize, parameters.PageNumber);
 
-            var categryDTO = _mapper.Map<List<CategoryDTOs>>(category);
+            var categryDTO = _mapper.Map<List<CategoryDTO>>(category);
 
-            return new PaginatedList<CategoryDTOs>(categryDTO, category.TotalCount, category.CurrentPage, category.PageSize);
+            return new PaginatedList<CategoryDTO>(categryDTO, category.TotalCount, category.CurrentPage, category.PageSize);
         }
-        public CategoryDTOs? GetCategoryById(int id)
+        public CategoryDTO? GetCategoryById(int id)
         {
             var category = _context.Categories.FirstOrDefault(x => x.Id == id);
 
@@ -50,16 +50,16 @@ namespace DiyorMarket.Services
                 throw new EntityNotFoundException($"Category with id: {id} not found");
             }
 
-            return _mapper.Map<CategoryDTOs>(category);
+            return _mapper.Map<CategoryDTO>(category);
         }
-        public CategoryDTOs CreateCategory(CategoryForCreateDto category)
+        public CategoryDTO CreateCategory(CategoryForCreateDTO category)
         {
-            var categoryEntity=_mapper.Map<Category>(category);
+            var categoryEntity = _mapper.Map<Category>(category);
 
             _context.Categories.Add(categoryEntity);
             _context.SaveChanges();
 
-             return _mapper.Map<CategoryDTOs>(categoryEntity);
+            return _mapper.Map<CategoryDTO>(categoryEntity);
         }
         public void UpdateCategory(CategoryForUpdateDto category)
         {

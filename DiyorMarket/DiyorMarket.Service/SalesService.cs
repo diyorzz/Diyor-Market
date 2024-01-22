@@ -18,7 +18,7 @@ namespace DiyorMarket.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public PaginatedList<SaleDTOs> Getsales(SaleResourseParametrs parametrs)
+        public PaginatedList<SaleDTO> Getsales(SaleResourseParametrs parametrs)
         {
             var query = _context.Sales.AsQueryable();
 
@@ -33,11 +33,11 @@ namespace DiyorMarket.Services
             }
             var sale = query.ToPaginatedList(parametrs.Pagesize, parametrs.PageNumber);
 
-            var saleDTO = _mapper.Map<List<SaleDTOs>>(sale);
+            var saleDTO = _mapper.Map<List<SaleDTO>>(sale);
 
-            return new PaginatedList<SaleDTOs>(saleDTO, sale.TotalCount, sale.CurrentPage, sale.PageSize);
+            return new PaginatedList<SaleDTO>(saleDTO, sale.TotalCount, sale.CurrentPage, sale.PageSize);
         }
-        public SaleDTOs? GetSaleById(int id)
+        public SaleDTO? GetSaleById(int id)
         {
             var sale = _context.Sales.FirstOrDefault(sale => sale.Id == id);
 
@@ -46,18 +46,18 @@ namespace DiyorMarket.Services
                 throw new EntityNotFoundException($"Product with id: {id} not found");
             }
 
-            return _mapper.Map<SaleDTOs>(sale);
+            return _mapper.Map<SaleDTO>(sale);
         }
-        public SaleDTOs CreateSale(SaleForCreateDTOs saleForCreate)
+        public SaleDTO CreateSale(SaleForCreateDTO saleForCreate)
         {
             var sale = _mapper.Map<Sale>(saleForCreate);
 
             _context.Sales.Add(sale);
             _context.SaveChanges();
 
-            return _mapper.Map<SaleDTOs>(sale);
+            return _mapper.Map<SaleDTO>(sale);
         }
-        public void UpdateSale(SaleForUpdateDTOs saleForUpdate)
+        public void UpdateSale(SaleForUpdateDTO saleForUpdate)
         {
             var sale = _mapper.Map<Sale>(saleForUpdate);
             _context.Sales.Update(sale);

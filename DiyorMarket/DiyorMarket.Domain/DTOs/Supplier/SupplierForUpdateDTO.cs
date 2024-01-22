@@ -1,6 +1,6 @@
 ﻿namespace DiyorMarket.Domain.DTOs.Supplier
 {
-    public record SupplierForUpdateDTOs(
+    public record SupplierForUpdateDTO(
         int Id,
         string FirstName,
         string LastName,

@@ -2,10 +2,10 @@
 
 namespace DiyorMarket.Domain.DTOs.Customer
 {
-    public record CustomerDTOs(
+    public record CustomerDTO(
         int Id,
-        string FullNama,
+        string FullName,
         string PhoneNumber,
-        ICollection<SaleDTOs> Sales
+        ICollection<SaleDTO> Sales
         );
 }

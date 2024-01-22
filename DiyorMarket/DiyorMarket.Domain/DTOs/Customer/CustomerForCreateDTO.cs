@@ -1,6 +1,6 @@
 ﻿namespace DiyorMarket.Domain.DTOs.Customer
 {
-    public record CustomerForCereateDTOs(
+    public record CustomerForCereateDTO(
         string FirstName,
         string LastName,
         string PhoneNumber

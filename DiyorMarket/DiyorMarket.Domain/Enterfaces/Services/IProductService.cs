@@ -6,10 +6,10 @@ namespace DiyorMarket.Domain.Enterfaces.Services
 {
     public interface IProductService
     {
-        PaginatedList<ProductDto> GetProducts(ProductResourceParameters parameters);
-        ProductDto? GetProductById(int id);
-        ProductDto CreateProduct(ProductForCreateDTOs productForCreate);
-        void UpdateProduct(ProductForUpdateDTOs productForUpdate);
+        PaginatedList<ProductDTO> GetProducts(ProductResourceParameters parameters);
+        ProductDTO? GetProductById(int id);
+        ProductDTO CreateProduct(ProductForCreateDTO productForCreate);
+        void UpdateProduct(ProductForUpdateDTO productForUpdate);
         void DeleteProduct(int id);
     }
 }

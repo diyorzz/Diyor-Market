@@ -43,7 +43,7 @@ namespace DiyorMarket.Extensions
         public static IServiceCollection ConfigureDatabaseContext(this IServiceCollection services)
         {
             services.AddDbContext<DiyorMarketDbContext>(options =>
-                options.UseSqlServer("MarketDb"));
+                options.UseSqlServer("Data Source=DESKTOP-7DUGPCC;Initial Catalog=DiyorMarket;Integrated Security=True;Trust Server Certificate=True"));
 
             return services;
         }

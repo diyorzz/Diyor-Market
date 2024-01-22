@@ -1,6 +1,6 @@
 ﻿namespace DiyorMarket.Domain.DTOs.Product
 {
-    public record ProductForUpdateDTOs(
+    public record ProductForUpdateDTO(
         int Id,
         string Name,
         string Description,

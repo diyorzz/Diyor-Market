@@ -5,8 +5,6 @@ using DiyorMarket.Domain.ResourceParameters;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace DiyorMarket.Controllers
 {
     [Route("api/categories")]
@@ -22,7 +20,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<CategoryDTOs>> GetCategories([FromQuery] CategoryResourseParametrs category)
+        public ActionResult<IEnumerable<CategoryDTO>> GetCategories([FromQuery] CategoryResourseParametrs category)
         {
             var categories = _categoryService.GetCategories(category);
 
@@ -34,7 +32,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet("{id}", Name = "GetCategoryById")]
-        public ActionResult<CategoryDTOs> GetCategoryById(int id)
+        public ActionResult<CategoryDTO> GetCategoryById(int id)
         {
             var category = _categoryService.GetCategoryById(id);
 
@@ -42,7 +40,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpPost]
-        public ActionResult<CategoryDTOs> CreateCategory([FromBody] CategoryForCreateDto category)
+        public ActionResult<CategoryDTO> CreateCategory([FromBody] CategoryForCreateDTO category)
         {
             _categoryService.CreateCategory(category);
 
@@ -70,7 +68,7 @@ namespace DiyorMarket.Controllers
 
             return NoContent();
         }
-        private PagenationMetaData GetPaginationMetaData(PaginatedList<CategoryDTOs> customerDtOs)
+        private PagenationMetaData GetPaginationMetaData(PaginatedList<CategoryDTO> customerDtOs)
         {
             return new PagenationMetaData
             {

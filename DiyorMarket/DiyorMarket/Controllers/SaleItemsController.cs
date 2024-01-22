@@ -22,7 +22,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<SaleItemDTOs>> Get([FromQuery]
+        public ActionResult<IEnumerable<SaleItemDTO>> Get([FromQuery]
         SaleItemResorseParametrs parametrs)
         {
             var saleitems = _saleItemService.GetSaleItems(parametrs);
@@ -34,21 +34,21 @@ namespace DiyorMarket.Controllers
             return Ok(saleitems);
         }
         [HttpGet("{id}")]
-        public ActionResult<SaleItemDTOs> Get(int id)
+        public ActionResult<SaleItemDTO> Get(int id)
         {
             var saleitem = _saleItemService.GetSaleItemById(id);
             return Ok(saleitem);
         }
 
         [HttpPost]
-        public ActionResult<ProductDto> Post([FromBody] SaleItemForCreateDTOs saleItem)
+        public ActionResult<ProductDTO> Post([FromBody] SaleItemForCreateDTO saleItem)
         {
             _saleItemService.CreateSaleItem(saleItem);
             return StatusCode(201);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] SaleItemForUpdateDTOs saleItem)
+        public ActionResult Put(int id, [FromBody] SaleItemForUpdateDTO saleItem)
         {
             _saleItemService.UpdateSaleItem(saleItem);
             return NoContent();
@@ -60,7 +60,7 @@ namespace DiyorMarket.Controllers
             _saleItemService.DeleteSaleItem(id);
             return NoContent();
         }
-        private PagenationMetaData GetPaginationMetaData(PaginatedList<SaleItemDTOs> saleItemDtOs)
+        private PagenationMetaData GetPaginationMetaData(PaginatedList<SaleItemDTO> saleItemDtOs)
         {
             return new PagenationMetaData
             {

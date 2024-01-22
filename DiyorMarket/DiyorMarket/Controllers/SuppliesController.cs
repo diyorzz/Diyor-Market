@@ -21,7 +21,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<SupplyDTOs>> Get([FromQuery] SupplyResourseParametrs paramentrs)
+        public ActionResult<IEnumerable<SupplyDTO>> Get([FromQuery] SupplyResourseParametrs paramentrs)
         {
             var supply = _supplyService.GetSupply(paramentrs);
 
@@ -33,7 +33,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<SupplyDTOs> Get(int id)
+        public ActionResult<SupplyDTO> Get(int id)
         {
             var supply = _supplyService.GetSupplyById(id);
 
@@ -41,14 +41,14 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpPost]
-        public ActionResult<SaleDTOs> Post([FromBody] SupplyForCreateDTOs supply)
+        public ActionResult<SaleDTO> Post([FromBody] SupplyForCreateDTO supply)
         {
             _supplyService.CreateSupply(supply);
             return StatusCode(201);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] SupplyForUpdateDTOs supply)
+        public ActionResult Put(int id, [FromBody] SupplyForUpdateDTO supply)
         {
             _supplyService.UpdateSupply(supply);
             return NoContent();
@@ -60,7 +60,7 @@ namespace DiyorMarket.Controllers
             _supplyService?.DeleteSupply(id);
             return NoContent();
         }
-        private PagenationMetaData GetPaginationMetaData(PaginatedList<SupplyDTOs> suppliersDTO)
+        private PagenationMetaData GetPaginationMetaData(PaginatedList<SupplyDTO> suppliersDTO)
         {
             return new PagenationMetaData
             {

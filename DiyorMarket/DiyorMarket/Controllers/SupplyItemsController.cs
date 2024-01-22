@@ -35,7 +35,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<SupplyDTOs> Get(int id)
+        public ActionResult<SupplyDTO> Get(int id)
         {
             var supplyitem = _suppyItemService.GetSupplyItemById(id);
 

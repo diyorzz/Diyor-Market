@@ -2,10 +2,10 @@
 
 namespace DiyorMarket.Domain.DTOs.Category
 {
-    public record CategoryDTOs
+    public record CategoryDTO
     (
         int Id,
         string Name,
         int NumberOfProducts,
-    ICollection<ProductDto> Products);
+    ICollection<ProductDTO> Products);
 }

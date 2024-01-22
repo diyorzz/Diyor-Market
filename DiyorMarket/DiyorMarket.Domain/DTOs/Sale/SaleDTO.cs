@@ -1,6 +1,7 @@
 ﻿namespace DiyorMarket.Domain.DTOs.Sale
 {
-    public record SaleForCreateDTOs(
+    public record SaleDTO(
+        int Id,
         DateTime SaleDate,
         int CustomerId
         );

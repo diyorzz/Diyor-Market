@@ -1,6 +1,6 @@
 ﻿namespace DiyorMarket.Domain.DTOs.Supply
 {
-    public record SupplyForCreateDTOs(
+    public record SupplyForCreateDTO(
         DateTime SupplyDate,
         int SupplierId
         );

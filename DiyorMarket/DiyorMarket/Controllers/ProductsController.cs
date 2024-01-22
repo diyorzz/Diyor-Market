@@ -18,7 +18,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ProductDto>> Get([FromQuery]
+        public ActionResult<IEnumerable<ProductDTO>> Get([FromQuery]
         ProductResourceParameters productResourceParameters)
         {
             var products = _productService.GetProducts(productResourceParameters);
@@ -31,13 +31,13 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<ProductDto> Get(int id)
+        public ActionResult<ProductDTO> Get(int id)
         {
             var product = _productService.GetProductById(id);
             return Ok(product);
         }
         [HttpPost]
-        public ActionResult<ProductDto> Post([FromBody] ProductForCreateDTOs product)
+        public ActionResult<ProductDTO> Post([FromBody] ProductForCreateDTO product)
         {
             _productService.CreateProduct(product);
 
@@ -45,7 +45,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] ProductForUpdateDTOs product)
+        public ActionResult Put(int id, [FromBody] ProductForUpdateDTO product)
         {
             _productService.UpdateProduct(product);
             return NoContent();
@@ -57,7 +57,7 @@ namespace DiyorMarket.Controllers
             _productService.DeleteProduct(id);
             return NoContent();
         }
-        private PagenationMetaData GetPaginationMetaData(PaginatedList<ProductDto> products)
+        private PagenationMetaData GetPaginationMetaData(PaginatedList<ProductDTO> products)
         {
             return new PagenationMetaData
             {

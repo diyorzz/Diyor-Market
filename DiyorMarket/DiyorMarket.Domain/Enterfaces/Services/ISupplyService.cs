@@ -6,10 +6,10 @@ namespace DiyorMarket.Domain.Enterfaces.Services
 {
     public interface  ISupplyService
     {
-        PaginatedList<SupplyDTOs> GetSupply(SupplyResourseParametrs resourseParametrs);
-        SupplyDTOs? GetSupplyById(int id);
-        SupplyDTOs CreateSupply(SupplyForCreateDTOs supplyForCreate);
-        void UpdateSupply(SupplyForUpdateDTOs supplyForUpdate);
+        PaginatedList<SupplyDTO> GetSupply(SupplyResourseParametrs resourseParametrs);
+        SupplyDTO? GetSupplyById(int id);
+        SupplyDTO CreateSupply(SupplyForCreateDTO supplyForCreate);
+        void UpdateSupply(SupplyForUpdateDTO supplyForUpdate);
         void DeleteSupply(int id);
     }
 }
