@@ -18,7 +18,7 @@ namespace DiyorMarket.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(context));
         }
-        public PaginatedList<SupplyDTOs> GetSupply(SupplyResourseParametrs parametrs)
+        public PaginatedList<SupplyDTO> GetSupply(SupplyResourseParametrs parametrs)
         {
             var query = _context.Supplies.AsQueryable();
 
@@ -33,28 +33,28 @@ namespace DiyorMarket.Services
             }
             var supplies = query.ToPaginatedList(parametrs.Pagesize, parametrs.PageNumber);
 
-            var supplyDTO = _mapper.Map<List<SupplyDTOs>>(supplies);
+            var supplyDTO = _mapper.Map<List<SupplyDTO>>(supplies);
 
-            return new PaginatedList<SupplyDTOs>(supplyDTO, supplies.TotalCount, supplies.CurrentPage, supplies.PageSize);
+            return new PaginatedList<SupplyDTO>(supplyDTO, supplies.TotalCount, supplies.CurrentPage, supplies.PageSize);
         }
-        public SupplyDTOs? GetSupplyById(int id)
+        public SupplyDTO? GetSupplyById(int id)
         {
             var supply = _context.Supplies.FirstOrDefault(supply => supply.Id == id);
             if (supply is null)
             {
                 throw new EntityNotFoundException($"Supply with id: {id} not found");
             }
-            return _mapper.Map<SupplyDTOs?>(supply);
+            return _mapper.Map<SupplyDTO?>(supply);
         }
-        public SupplyDTOs CreateSupply(SupplyForCreateDTOs supplyForCreate)
+        public SupplyDTO CreateSupply(SupplyForCreateDTO supplyForCreate)
         {
             var supply = _mapper.Map<Supply>(supplyForCreate);
             _context.Supplies.Add(supply);
             _context.SaveChanges();
 
-            return _mapper.Map<SupplyDTOs>(supply);
+            return _mapper.Map<SupplyDTO>(supply);
         }
-        public void UpdateSupply(SupplyForUpdateDTOs supplyForUpdate)
+        public void UpdateSupply(SupplyForUpdateDTO supplyForUpdate)
         {
             var supply = _mapper.Map<Supply>(supplyForUpdate);
             _context.Supplies.Update(supply);

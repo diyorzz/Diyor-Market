@@ -21,7 +21,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<SaleDTOs>> Get([FromQuery] SaleResourseParametrs parametrs)
+        public ActionResult<IEnumerable<SaleDTO>> Get([FromQuery] SaleResourseParametrs parametrs)
         {
             var sales = _saleService.Getsales(parametrs);
 
@@ -33,7 +33,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<SaleDTOs> Get(int id)
+        public ActionResult<SaleDTO> Get(int id)
         {
             var sales=_saleService.GetSaleById(id);
 
@@ -41,7 +41,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpPost]
-        public ActionResult<SaleDTOs> Post([FromBody] SaleForCreateDTOs saleFor)
+        public ActionResult<SaleDTO> Post([FromBody] SaleForCreateDTO saleFor)
         {
             _saleService.CreateSale(saleFor);
 
@@ -49,7 +49,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] SaleForUpdateDTOs sale)
+        public ActionResult Put(int id, [FromBody] SaleForUpdateDTO sale)
         {
             _saleService.UpdateSale(sale);
 
@@ -63,7 +63,7 @@ namespace DiyorMarket.Controllers
 
             return NoContent();
         }
-        private PagenationMetaData GetPaginationMetaData(PaginatedList<SaleDTOs> saleDtOs)
+        private PagenationMetaData GetPaginationMetaData(PaginatedList<SaleDTO> saleDtOs)
         {
             return new PagenationMetaData
             {

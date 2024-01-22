@@ -1,6 +1,6 @@
 ﻿namespace DiyorMarket.Domain.DTOs.SaleItam
 {
-    public record SaleItemForUpdateDTOs(
+    public record SaleItemForUpdateDTO(
         int Id,
         int Quantity,
         decimal UnitPrice,

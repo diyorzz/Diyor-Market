@@ -19,7 +19,7 @@ namespace DiyorMarket.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public PaginatedList<ProductDto> GetProducts(ProductResourceParameters parameters)
+        public PaginatedList<ProductDTO> GetProducts(ProductResourceParameters parameters)
         {
             var query = _context.Products.AsQueryable();
 
@@ -67,11 +67,11 @@ namespace DiyorMarket.Services
 
             var products = query.ToPaginatedList(parameters.Pagesize, parameters.PageNumber);
 
-            var productDTO = _mapper.Map<List<ProductDto>>(products);
+            var productDTO = _mapper.Map<List<ProductDTO>>(products);
 
-            return new PaginatedList<ProductDto>(productDTO, products.TotalCount, products.CurrentPage, products.PageSize);
+            return new PaginatedList<ProductDTO>(productDTO, products.TotalCount, products.CurrentPage, products.PageSize);
         }
-        public ProductDto? GetProductById(int id)
+        public ProductDTO? GetProductById(int id)
         {
             var product = _context.Products.FirstOrDefault(p => p.Id == id);
 
@@ -80,18 +80,18 @@ namespace DiyorMarket.Services
                 throw new EntityNotFoundException($"Product with id: {id} not found");
             }
 
-            return _mapper.Map<ProductDto?>(product);
+            return _mapper.Map<ProductDTO?>(product);
         }
-        public ProductDto CreateProduct(ProductForCreateDTOs productForCreate)
+        public ProductDTO CreateProduct(ProductForCreateDTO productForCreate)
         {
             var product = _mapper.Map<Product>(productForCreate);
 
             _context.Products.Add(product);
             _context.SaveChanges();
 
-            return _mapper.Map<ProductDto>(product);
+            return _mapper.Map<ProductDTO>(product);
         }
-        public void UpdateProduct(ProductForUpdateDTOs productForUpdate)
+        public void UpdateProduct(ProductForUpdateDTO productForUpdate)
         {
             var product = _mapper.Map<Product>(productForUpdate);
 

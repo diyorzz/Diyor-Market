@@ -14,14 +14,14 @@ namespace DiyorMarket.Extensions
             var options = serviceProvider.GetRequiredService<DbContextOptions<DiyorMarketDbContext>>();
             using var context = new DiyorMarketDbContext(options);
 
-            //CreateCategories(context);
-            //CreateProducts(context);
-            //CreateCustomers(context);
-            //CreateSales(context);
-            //CreateSaleItems(context);
-            //CreateSuppliers(context);
-            //CreateSupplies(context);
-            //CreateSupplyItems(context);
+            CreateCategories(context);
+            CreateProducts(context);
+            CreateCustomers(context);
+            CreateSales(context);
+            CreateSaleItems(context);
+            CreateSuppliers(context);
+            CreateSupplies(context);
+            CreateSupplyItems(context);
         }
         private static void CreateCategories(DiyorMarketDbContext context)
         {

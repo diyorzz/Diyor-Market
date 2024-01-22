@@ -6,10 +6,10 @@ namespace DiyorMarket.Domain.Enterfaces.Services
 {
     public interface  ICustomerService
     {
-        PaginatedList<CustomerDTOs> GetCustomers(CustomerResourceParameters parameters);
-        CustomerDTOs? GetCustomerById(int id);
-        CustomerDTOs CreateCustomer(CustomerForCereateDTOs customerForCereate);
-        void UpdateCustomer(CustomerForUpdateDTOs customerForUpdate);
+        PaginatedList<CustomerDTO> GetCustomers(CustomerResourceParameters parameters);
+        CustomerDTO? GetCustomerById(int id);
+        CustomerDTO CreateCustomer(CustomerForCereateDTO customerForCereate);
+        void UpdateCustomer(CustomerForUpdateDTO customerForUpdate);
         void DeleteCustomer(int id);
     }
 }

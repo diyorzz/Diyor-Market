@@ -6,9 +6,9 @@ namespace DiyorMarket.Domain.Enterfaces.Services
 {
     public interface ICategoryService
     {
-        PaginatedList<CategoryDTOs> GetCategories(CategoryResourseParametrs parametrs);
-        CategoryDTOs? GetCategoryById(int id);
-        CategoryDTOs CreateCategory(CategoryForCreateDto category);
+        PaginatedList<CategoryDTO> GetCategories(CategoryResourseParametrs parametrs);
+        CategoryDTO? GetCategoryById(int id);
+        CategoryDTO CreateCategory(CategoryForCreateDTO category);
         void UpdateCategory(CategoryForUpdateDto category); 
         void DeleteCategory(int id);
     }

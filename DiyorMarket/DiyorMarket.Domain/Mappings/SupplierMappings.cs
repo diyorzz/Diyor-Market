@@ -7,11 +7,11 @@ namespace DiyorMarket.Domain.Mappings
     {
         public SupplierMappings()
         {
-            CreateMap<Supplier, SupplierDTOs>()
+            CreateMap<Supplier, SupplierDTO>()
                 .ForCtorParam("FullName", opt => opt.MapFrom(src => string.Join(" ", src.FirstName, src.LastName)));
-            CreateMap<SupplierDTOs, Supplier>();
-            CreateMap<SupplierForCreateDTOs, Supplier>();
-            CreateMap<SupplierForUpdateDTOs, Supplier>();
+            CreateMap<SupplierDTO, Supplier>();
+            CreateMap<SupplierForCreateDTO, Supplier>();
+            CreateMap<SupplierForUpdateDTO, Supplier>();
         }
     }
 }

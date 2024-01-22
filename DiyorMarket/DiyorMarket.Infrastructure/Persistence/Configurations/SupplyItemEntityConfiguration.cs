@@ -16,6 +16,7 @@ namespace DiyorMarket.Infrastructure.Persistence.Configurations
                 .IsRequired();
 
             builder.Property(si => si.UnitPrice)
+                .HasColumnType("money")
                 .IsRequired();
 
             builder.HasOne(si => si.Supply)

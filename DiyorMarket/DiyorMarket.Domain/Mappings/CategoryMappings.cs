@@ -8,10 +8,12 @@ namespace DiyorMarket.Domain.Mappings
     {
         public CategoryMappings()
         {
-            CreateMap<Category, CategoryDTOs>()
-            .ForMember(x => x.NumberOfProducts, t => t.MapFrom(p => p.Products.Count));
-            CreateMap<CategoryDTOs, Category>();
-            CreateMap<CategoryForCreateDto, Category>();
+            CreateMap<Category, CategoryDTO>()
+            //.ForMember(x => x.NumberOfProducts, t => t.MapFrom(p => p.Products.Count));
+            .ForCtorParam(nameof(Category.NumberOfProducts),
+                    opt => opt.MapFrom(src => src.Products.Count()));
+            CreateMap<CategoryDTO, Category>();
+            CreateMap<CategoryForCreateDTO, Category>();
             CreateMap<CategoryForUpdateDto, Category>();
         }
     }

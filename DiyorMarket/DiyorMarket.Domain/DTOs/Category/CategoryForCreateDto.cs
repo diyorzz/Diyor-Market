@@ -1,4 +1,4 @@
 ﻿namespace DiyorMarket.Domain.DTOs.Category
 {
-    public record CategoryForCreateDto(string Name);
+    public record CategoryForCreateDTO(string Name);
 }

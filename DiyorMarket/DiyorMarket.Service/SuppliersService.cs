@@ -18,7 +18,7 @@ namespace DiyorMarket.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public PaginatedList<SupplierDTOs> GetSupplier(SupplierResourseParamentrs paramentrs)
+        public PaginatedList<SupplierDTO> GetSupplier(SupplierResourseParamentrs paramentrs)
         {
             var query = _context.Suppliers.AsQueryable();
 
@@ -42,28 +42,28 @@ namespace DiyorMarket.Services
             }
             var suppliers = query.ToPaginatedList(paramentrs.Pagesize, paramentrs.PageNumber);
 
-            var suppliersDTO = _mapper.Map<List<SupplierDTOs>>(suppliers);
+            var suppliersDTO = _mapper.Map<List<SupplierDTO>>(suppliers);
 
-            return new PaginatedList<SupplierDTOs>(suppliersDTO, suppliers.TotalCount, suppliers.CurrentPage, suppliers.PageSize);
+            return new PaginatedList<SupplierDTO>(suppliersDTO, suppliers.TotalCount, suppliers.CurrentPage, suppliers.PageSize);
         }
-        public SupplierDTOs? GetSupplierById(int id)
+        public SupplierDTO? GetSupplierById(int id)
         {
             var supplier = _context.Suppliers.FirstOrDefault(supplier => supplier.Id == id);
             if (supplier is null)
             {
                 throw new EntityNotFoundException($"Supplier with id: {id} not found");
             }
-            return _mapper.Map<SupplierDTOs>(supplier);
+            return _mapper.Map<SupplierDTO>(supplier);
         }
-        public SupplierDTOs CreateSupplier(SupplierForCreateDTOs supplierForCreate)
+        public SupplierDTO CreateSupplier(SupplierForCreateDTO supplierForCreate)
         {
             var supplier = _mapper.Map<Supplier>(supplierForCreate);
             _context.Suppliers.Add(supplier);
             _context.SaveChanges();
 
-            return _mapper.Map<SupplierDTOs>(supplier);
+            return _mapper.Map<SupplierDTO>(supplier);
         }
-        public void UpdateSupplier(SupplierForUpdateDTOs supplierForUpdate)
+        public void UpdateSupplier(SupplierForUpdateDTO supplierForUpdate)
         {
             var supplier = _mapper.Map<Supplier>(supplierForUpdate);
             _context.Suppliers.Update(supplier);

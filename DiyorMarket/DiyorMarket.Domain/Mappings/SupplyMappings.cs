@@ -8,10 +8,10 @@ namespace DiyorMarket.Domain.Mappings
     {
         public SupplyMappings()
         {
-            CreateMap<SupplyDTOs, Supply>();
-            CreateMap<Supply, SupplyDTOs>();
-            CreateMap<SupplyForCreateDTOs, Supply>();
-            CreateMap<SupplyForUpdateDTOs, Supply>();
+            CreateMap<SupplyDTO, Supply>();
+            CreateMap<Supply, SupplyDTO>();
+            CreateMap<SupplyForCreateDTO, Supply>();
+            CreateMap<SupplyForUpdateDTO, Supply>();
         }
     }
 }

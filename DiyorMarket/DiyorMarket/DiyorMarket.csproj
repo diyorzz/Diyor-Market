@@ -32,8 +32,4 @@
     <ProjectReference Include="..\DiyorMarket.Service\DiyorMarket.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Page\" />
-  </ItemGroup>
-
 </Project>

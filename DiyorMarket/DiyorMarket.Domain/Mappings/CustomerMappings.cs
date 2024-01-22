@@ -8,12 +8,12 @@ namespace DiyorMarket.Domain.Mappings
     {
         public CustomerMappings()
         {
-            CreateMap<Customer, CustomerDTOs>()
+            CreateMap<Customer, CustomerDTO>()
                     .ForCtorParam("FullName", opt => opt.MapFrom(src => string.Join(" ", src.FirstName, src.LastName)));
             CreateMap<Customer, Customer>();
-            CreateMap<CustomerForCereateDTOs, Customer>();
-            CreateMap<Customer, CustomerForCereateDTOs>();
-            CreateMap<CustomerForUpdateDTOs, Customer>();
+            CreateMap<CustomerForCereateDTO, Customer>();
+            CreateMap<Customer, CustomerForCereateDTO>();
+            CreateMap<CustomerForUpdateDTO, Customer>();
         }
     }
 }

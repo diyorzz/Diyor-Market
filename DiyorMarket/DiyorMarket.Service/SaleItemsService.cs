@@ -18,7 +18,7 @@ namespace DiyorMarket.Services
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-        public PaginatedList<SaleItemDTOs> GetSaleItems(SaleItemResorseParametrs parametrs)
+        public PaginatedList<SaleItemDTO> GetSaleItems(SaleItemResorseParametrs parametrs)
         {
             var query = _context.SalesItems.AsQueryable();
 
@@ -53,11 +53,11 @@ namespace DiyorMarket.Services
             }
             var saleItems = query.ToPaginatedList(parametrs.Pagesize, parametrs.PageNumber);
 
-            var saleitemsDTO = _mapper.Map<List<SaleItemDTOs>>(saleItems);
+            var saleitemsDTO = _mapper.Map<List<SaleItemDTO>>(saleItems);
 
-            return new PaginatedList<SaleItemDTOs>(saleitemsDTO, saleItems.TotalCount, saleItems.CurrentPage, saleItems.PageSize);
+            return new PaginatedList<SaleItemDTO>(saleitemsDTO, saleItems.TotalCount, saleItems.CurrentPage, saleItems.PageSize);
         }
-        public SaleItemDTOs? GetSaleItemById(int id)
+        public SaleItemDTO? GetSaleItemById(int id)
         {
             var saleItem = _context.SalesItems.FirstOrDefault(sale => sale.Id == id);
 
@@ -66,17 +66,17 @@ namespace DiyorMarket.Services
                 throw new EntityNotFoundException($"SaleItem with id: {id} not found");
             }
 
-            return _mapper.Map<SaleItemDTOs?>(saleItem);
+            return _mapper.Map<SaleItemDTO?>(saleItem);
         }
-        public SaleItemDTOs CreateSaleItem(SaleItemForCreateDTOs saleItemForCreate)
+        public SaleItemDTO CreateSaleItem(SaleItemForCreateDTO saleItemForCreate)
         {
             var saleItem = _mapper.Map<SaleItem>(saleItemForCreate);
             _context.SalesItems.Add(saleItem);
             _context.SaveChanges();
 
-            return _mapper.Map<SaleItemDTOs>(saleItem);
+            return _mapper.Map<SaleItemDTO>(saleItem);
         }
-        public void UpdateSaleItem(SaleItemForUpdateDTOs saleItemForUpdate)
+        public void UpdateSaleItem(SaleItemForUpdateDTO saleItemForUpdate)
         {
             var saleItem = _mapper.Map<SaleItem>(saleItemForUpdate);
             _context.SalesItems.Update(saleItem);
