@@ -1,5 +1,4 @@
-﻿using DiyorMarket.Domain.DTOs.Customer;
-using DiyorMarket.Domain.DTOs.Sale;
+﻿using DiyorMarket.Domain.DTOs.Sale;
 using DiyorMarket.Domain.DTOs.Supplier;
 using DiyorMarket.Domain.Enterfaces.Services;
 using DiyorMarket.Domain.Pagination;
@@ -23,9 +22,9 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<SupplierDTO>> Get([FromQuery]SupplierResourseParamentrs paramentrs)
+        public ActionResult<IEnumerable<SupplierDTO>> Get([FromQuery] SupplierResourseParamentrs paramentrs)
         {
-            var supplier=_supplierService.GetSupplier(paramentrs);
+            var supplier = _supplierService.GetSupplier(paramentrs);
 
             var metaData = GetPaginationMetaData(supplier);
 
@@ -36,7 +35,7 @@ namespace DiyorMarket.Controllers
         [HttpGet("{id}")]
         public ActionResult<SupplierDTO> Get(int id)
         {
-            var supplier= _supplierService.GetSupplierById(id);
+            var supplier = _supplierService.GetSupplierById(id);
             return Ok(supplier);
         }
 

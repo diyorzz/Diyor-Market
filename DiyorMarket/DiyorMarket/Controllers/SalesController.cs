@@ -35,7 +35,7 @@ namespace DiyorMarket.Controllers
         [HttpGet("{id}")]
         public ActionResult<SaleDTO> Get(int id)
         {
-            var sales=_saleService.GetSaleById(id);
+            var sales = _saleService.GetSaleById(id);
 
             return Ok(sales);
         }

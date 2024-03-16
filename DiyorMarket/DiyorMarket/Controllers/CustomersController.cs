@@ -19,7 +19,7 @@ namespace DiyorMarket.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<CustomerDTO>> Get([FromQuery]CustomerResourceParameters parameters)
+        public ActionResult<IEnumerable<CustomerDTO>> Get([FromQuery] CustomerResourceParameters parameters)
         {
             var customers = _customerService.GetCustomers(parameters);
 
@@ -39,13 +39,13 @@ namespace DiyorMarket.Controllers
         [HttpPost]
         public ActionResult<CustomerDTO> Post([FromBody] CustomerForCereateDTO customer)
         {
-             _customerService.CreateCustomer(customer);
+            _customerService.CreateCustomer(customer);
 
             return StatusCode(201);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put([FromRoute]int id, [FromBody] CustomerForUpdateDTO customer)
+        public ActionResult Put([FromRoute] int id, [FromBody] CustomerForUpdateDTO customer)
         {
             if (id != customer.Id)
             {
